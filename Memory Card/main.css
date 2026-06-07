@@ -1,0 +1,152 @@
+body{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    background-color: black;
+}
+
+button{
+    border: 1px solid white;
+    padding: 10px;
+    gap: 50px;
+    color: white;
+    font-size: 26px;
+    border-radius: 5px;
+    background-color: transparent;
+}
+button:hover{
+    border: 1px solid red;
+    -webkit-text-strokeS: 1px solid white;
+    color: red;
+    transition-duration: 500ms;
+}
+
+h1,h5,p{
+    color: white;
+}
+
+input{
+    background-color: transparent;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+}
+
+#Header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#SaveFormDiv , #EditFormDiv , #ViewDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#SaveForm , #EditForm {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    width: 500px;
+    background-color: rgb(27, 27, 27);
+    /* margin-left: 400px; */
+    border-radius: 15px;
+    row-gap: 20px;
+    margin: 0 auto;
+}
+
+#SaveTitle , #SaveDescription , #SaveFormBtns , #EditTitle , #EditDescription , #EditFormBtns {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    row-gap: 5px;
+    column-gap: 20px;
+}
+#SaveFormSubmit , #SaveFormClose ,#EditFormSubmit , #EditFormClose{
+    font-size: 22px;
+    padding: 5px;
+    width: 70px;
+}
+
+#SaveCardDescription , #EditCardDescription{
+    background-color: transparent;
+    color: white;
+    border: none;
+    border-bottom: 1px solid white;
+    width: 300px;
+    font-size: 20px;
+}
+#SaveCardTitle , #EditCardTitle{
+    font-size: 20px;
+}
+
+#Board{
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    padding-bottom: 20px;
+}
+
+#buttons{
+    display: flex;
+    justify-content: space-around;
+}
+
+#ViewDiv{
+    display:flex;
+    flex-direction: column;
+    width: 500px;
+    /* row-gap: 20px; */
+    margin: 0 auto;
+    align-items: center;
+    background-Color  : rgb(239, 239, 239);
+    border-Radius  : "5px";
+    border : "none";
+}
+#ViewTitle , #ViewDescription{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 5px;
+    column-gap: 20px;
+}
+#ViewCardDescription{
+    overflow-y: auto;
+    word-wrap: break-word;
+    display: grid;
+    grid-template-columns: auto 1fr; 
+    align-items: center;
+    gap: 10px;        
+}
+#ViewDescription h5,
+#ViewDescription p {
+    margin: 0;          
+}
+#ViewDiv h5{
+    color: black;
+}
+#ViewCardDescription , #ViewCardTitle {
+    color: black;
+    margin-left: 10px;
+    font-size: 20px;
+}
+#ViewDivClose{
+    border: 1px solid black;
+    font-size : 16px;
+    border-radius: 5px;
+    background-color: transparent;
+    color: black;
+    margin: 10px;
+}
+#ViewDivClose:hover{
+    border: 1px solid red;
+    color: red;
+    transition-duration: 0.3s;
+}
