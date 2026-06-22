@@ -15,8 +15,8 @@ const AddSectionEventDiv = document.getElementById('AddSectionEvent');
 AddSectionEventDiv.style.display = "none";
 const AddSectionAddBtn = document.getElementById('AddSection-AddBtn');
 const AddSectionCloseBtn = document.getElementById('AddSection-CloseBtn');
-const AddSectionTitle = document.getElementById('AddSectionTask-TitleInput');
-const AddSectionDesc = document.getElementById('AddSectionTask-DescInput');
+const AddSectionTask_Title = document.getElementById('AddSectionTask-TitleInput');
+const AddSectionTask_Desc = document.getElementById('AddSectionTask-DescInput');
 const AddSectionTaskBtn = document.getElementById('AddSection-AddTask');
 const AddSectionEventBtn = document.getElementById('AddSection-AddEvent');
 
@@ -29,16 +29,32 @@ class TodoAPP{
         this.$LastEventID = 0;
     }
 
-    _SaveTask = (e)=> {
+    AddToDo = () =>{
+        AddSection.style.display = "block";
+
+        AddSectionAddBtn.removeEventListener('click', this._AddTask);
+        AddSectionCloseBtn.removeEventListener('click', this._closeSaveForm);
+
+        AddSectionAddBtn.addEventListener('click' , this._AddTask);
+        AddSectionCloseBtn.addEventListener('click' , this._closeSaveForm);
+    }
+
+    _AddTask = (e)=> {
         try{
-            const t = AddSectionTitle.value;
-            const d = AddSectionDesc.value;
+            const t = AddSectionTask_Title.value;
+            const d = AddSectionTask_Desc.value;
 
             this._CreatTask(t,d);
+            console.log(this.$TaskList);
 
         }catch(err){
             console.log(err.message);
         }
+    }
+
+    _CloseAddSection = ()=>{
+        AddSectionTask_Title , AddSectionTask_Desc = "" , "";
+        AddSection.style.display = "none";
     }
 
     _AssignTaskID(Task){
