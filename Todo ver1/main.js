@@ -4,15 +4,19 @@ const EditBtn = document.getElementById('EditTodo');
 
 
 const Task = {
-    id : Number,
+    id: Number,
     title: String,
-    descript = String
+    descript: String,
+    Start: Date,
+    End: Date
 }
 
 const Event = {
-    id : Number,
+    id: Number,
     title: String,
-    descript = String
+    descript: String,
+    date: Date,
+    duration: Number
 }
 
 class TodoAPP{
@@ -20,5 +24,6 @@ class TodoAPP{
         this.$TaskList = [];
         this.$EventList = [];
     }
+
 
 }
