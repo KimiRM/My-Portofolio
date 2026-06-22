@@ -15,6 +15,7 @@ class TodoAPP{
         this.$LastTaskID = 0;
         this.$LastEventID = 0;
     }
+    
     _AssignTaskID(Task){
         Task.id = this.$LastTaskID +1;
         this.$LastTaskID++;
