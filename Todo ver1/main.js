@@ -33,10 +33,10 @@ class TodoAPP{
         AddSection.style.display = "block";
 
         AddSectionAddBtn.removeEventListener('click', this._AddTask);
-        AddSectionCloseBtn.removeEventListener('click', this._closeSaveForm);
+        AddSectionCloseBtn.removeEventListener('click', this._CloseAddSection);
 
         AddSectionAddBtn.addEventListener('click' , this._AddTask);
-        AddSectionCloseBtn.addEventListener('click' , this._closeSaveForm);
+        AddSectionCloseBtn.addEventListener('click' , this._CloseAddSection);
     }
 
     _AddTask = (e)=> {
@@ -89,4 +89,10 @@ class TodoAPP{
         this.$EventList.push(newEvent);
     }
 
+}
+
+function SetUp(){
+    const app = new TodoAPP;
+    AddBtn.addEventListener('click',app.AddToDo);
+    
 }

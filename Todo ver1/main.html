@@ -6,7 +6,7 @@
     <title>Todo</title>
     <link rel="stylesheet" href="main.css">
 </head>
-<body>
+<body onload="Setup()">
     <div id="LandingWelcome">
         <h1 id="LandingHeader">Your <span id="LandingHeaderStrikeOut">TODO</span> List</h1>
         <h4 id="LandingSubHeader">Manage your tasks and events</h4>
@@ -40,7 +40,7 @@
             </div>
             <div id="AddSectionTask-desc">
                 <h3>Description: </h3>
-                <textarea id="AddSectionTask-DescInput" rows="4" cols="50">
+                <textarea id="AddSectionTask-DescInput" rows="4" cols="50"></textarea>
             </div>
         </div>
         <div id="AddSectionEvent">
