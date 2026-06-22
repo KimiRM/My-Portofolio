@@ -31,6 +31,7 @@ class TodoAPP{
 
     AddToDo = () =>{
         AddSection.style.display = "block";
+        AddSectionTaskDiv.style.display = "block";
 
         AddSectionAddBtn.removeEventListener('click', this._AddTask);
         AddSectionCloseBtn.removeEventListener('click', this._CloseAddSection);
@@ -39,7 +40,7 @@ class TodoAPP{
         AddSectionCloseBtn.addEventListener('click' , this._CloseAddSection);
     }
 
-    _AddTask = (e)=> {
+    _AddTask = ()=> {
         try{
             const t = AddSectionTask_Title.value;
             const d = AddSectionTask_Desc.value;
@@ -53,18 +54,20 @@ class TodoAPP{
     }
 
     _CloseAddSection = ()=>{
-        AddSectionTask_Title , AddSectionTask_Desc = "" , "";
+        AddSectionTask_Title.value ="" ;
+        AddSectionTask_Desc.value = "";
         AddSection.style.display = "none";
+        AddSectionTaskDiv.style.display = "none";
     }
 
     _AssignTaskID(Task){
-        Task.id = this.$LastTaskID +1;
         this.$LastTaskID++;
+        return this.$LastTaskID;
     }
 
     _AssignEventID(Event){
-        Event.id = this.$LastEventID +1;
         this.$LastEventID++;
+        return this.$LastEventID;
     }
 
     _CreatTask(title="Undefined",desc="",start=moment().format("YYYYMMDD"),end=moment().format("YYYYMMDD")){
@@ -75,7 +78,7 @@ class TodoAPP{
             Start: start,
             End: end
         };
-        this.$TaskList.push(Task);
+        this.$TaskList.push(newTask);
     }
 
     _CreatEvent(title="Undefined",desc="",date=moment().format("YYYYMMDD"),dur=0){
@@ -91,8 +94,8 @@ class TodoAPP{
 
 }
 
-function SetUp(){
+function Setup(){
     const app = new TodoAPP;
     AddBtn.addEventListener('click',app.AddToDo);
-    
+
 }
