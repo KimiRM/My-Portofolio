@@ -3,21 +3,7 @@ const DeleteBtn = document.getElementById('DeleteTodo');
 const EditBtn = document.getElementById('EditTodo');
 
 
-const Task = {
-    id: Number,
-    title: String,
-    descript: String,
-    Start: Date,
-    End: Date
-}
 
-const Event = {
-    id: Number,
-    title: String,
-    descript: String,
-    date: Date,
-    duration: Number
-}
 
 class TodoAPP{
     constructor(){
@@ -36,5 +22,26 @@ class TodoAPP{
         this.$LastEventID++;
     }
 
-    
+    _CreatTask(title,desc,start,end){
+        const newTask = {
+            id: this._AssignTaskID(this),
+            title: title,
+            descript: desc,
+            Start: start,
+            End: end
+        };
+        this.$TaskList.push(Task);
+    }
+
+    _CreatEvent(title,desc,date,dur){
+        const newEvent = {
+            id: this._AssignEventID(this),
+            title: title,
+            descript: desc,
+            date: date,
+            duration: dur
+        };
+        this.$EventList.push(newEvent);
+    }
+
 }
