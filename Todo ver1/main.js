@@ -1,7 +1,10 @@
 const AddBtn = document.getElementById('AddTodo');
 const DeleteBtn = document.getElementById('DeleteTodo');
 const EditBtn = document.getElementById('EditTodo');
-
+const TaskEventTable = document.getElementById('TaskEventTable');
+const TodoTable = document.getElementById('TodoTable');
+const TableRightMenu = document.getElementById('RightMenu');
+const TableLeftMenu = document.getElementById('LeftMenu');
 
 
 
