@@ -8,8 +8,11 @@ const TableRightMenu = document.getElementById('RightMenu');
 const TableLeftMenu = document.getElementById('LeftMenu');
 
 const AddSection = document.getElementById('AddSection');
+AddSection.style.display = "none";
 const AddSectionTaskDiv = document.getElementById('AddSectionTask');
+AddSectionTaskDiv.style.display = "none";
 const AddSectionEventDiv = document.getElementById('AddSectionEvent');
+AddSectionEventDiv.style.display = "none";
 const AddSectionAddBtn = document.getElementById('AddSection-AddBtn');
 const AddSectionCloseBtn = document.getElementById('AddSection-CloseBtn');
 const AddSectionTitle = document.getElementById('AddSectionTask-TitleInput');
@@ -26,6 +29,18 @@ class TodoAPP{
         this.$LastEventID = 0;
     }
 
+    _SaveTask = (e)=> {
+        try{
+            const t = AddSectionTitle.value;
+            const d = AddSectionDesc.value;
+
+            this._CreatTask(t,d);
+
+        }catch(err){
+            console.log(err.message);
+        }
+    }
+
     _AssignTaskID(Task){
         Task.id = this.$LastTaskID +1;
         this.$LastTaskID++;
@@ -36,7 +51,7 @@ class TodoAPP{
         this.$LastEventID++;
     }
 
-    _CreatTask(title,desc,start,end){
+    _CreatTask(title="Undefined",desc="",start=moment().format("YYYYMMDD"),end=moment().format("YYYYMMDD")){
         const newTask = {
             id: this._AssignTaskID(this),
             title: title,
@@ -47,7 +62,7 @@ class TodoAPP{
         this.$TaskList.push(Task);
     }
 
-    _CreatEvent(title,desc,date,dur){
+    _CreatEvent(title="Undefined",desc="",date=moment().format("YYYYMMDD"),dur=0){
         const newEvent = {
             id: this._AssignEventID(this),
             title: title,
