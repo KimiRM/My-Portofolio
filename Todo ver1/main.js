@@ -80,10 +80,6 @@ class TodoAPP{
             const st = AddSectionTask_StartTime.value;
             const et = AddSectionTask_EndTime.value;
 
-            const now = moment().format('MM/DD/YYYY-DDTHH:mm');
-            AddSectionTask_StartTime.value = now;
-            AddSectionTask_EndTime.value = now;
-
             this._CreatTask(t,d,st,et);
             console.log(this.$TaskList);
             this._CloseAddSection();
@@ -121,9 +117,6 @@ class TodoAPP{
             const t = AddSectionEvent_Title.value;
             const d = AddSectionEvent_Desc.value;
             const date = AddSectionEvent_Date.value;
-
-            const now = moment().format('MM/DD/YYYY-DDTHH:mm');
-            AddSectionEvent_Date.value = now;
 
             this._CreatEvent(t,d,date);
             console.log(this.$EventList);
