@@ -66,6 +66,11 @@ class TodoAPP{
         AddSectionFooter.style.display = "block";
         AddSectionEventDiv.style.display = "none";
 
+        const now = moment().format('YYYY-MM-DDTHH:mm');
+        AddSectionTask_StartTime.value = now;
+        AddSectionTask_EndTime.value = now;
+        console.log(`start time ${AddSectionTask_StartTime.value} and end time ${AddSectionTask_EndTime.value}`)
+
         AddSectionAddBtn.removeEventListener('click', this._AddTask);
         AddSectionCloseBtn.removeEventListener('click', this._CloseAddSection);
 
@@ -79,11 +84,6 @@ class TodoAPP{
             const d = AddSectionTask_Desc.value;
             const st = AddSectionTask_StartTime.value;
             const et = AddSectionTask_EndTime.value;
-
-            const now = moment().format('YYYY-MM-DDTHH:mm');
-            AddSectionTask_StartTime.value = now;
-            AddSectionTask_EndTime.value = now;
-            console.log(`start time ${AddSectionTask_StartTime.value} and end time ${AddSectionTask_EndTime.value}`)
 
             this._CreatTask(t,d,st,et);
             console.log(this.$TaskList);
@@ -110,6 +110,9 @@ class TodoAPP{
         AddSectionFooter.style.display = "block";
         AddSectionTaskDiv.style.display = "none";
 
+        const now = moment().format('YYYY-MM-DDTHH:mm');
+        AddSectionEvent_Date.value = now;
+
         AddSectionAddBtn.removeEventListener('click', this._AddEvent);
         AddSectionCloseBtn.removeEventListener('click', this._CloseAddSection);
 
@@ -123,8 +126,6 @@ class TodoAPP{
             const d = AddSectionEvent_Desc.value;
             const date = AddSectionEvent_Date.value;
 
-            const now = moment().format('YYYY-MM-DDTHH:mm');
-            AddSectionEvent_Date.value = now;
 
             this._CreatEvent(t,d,date);
             console.log(this.$EventList);
