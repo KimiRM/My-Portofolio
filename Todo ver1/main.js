@@ -128,6 +128,7 @@ class TodoAPP{
     _CreatTask(title="Undefined",desc="",start=moment().format("YYYYMMDD"),end=moment().format("YYYYMMDD")){
         const newTask = {
             id: this._AssignTaskID(this),
+            type: "Task",
             title: title,
             descript: desc,
             Start: start,
@@ -139,6 +140,7 @@ class TodoAPP{
     _CreatEvent(title="Undefined",desc="",date=moment().format("YYYYMMDD"),dur=0){
         const newEvent = {
             id: this._AssignEventID(this),
+            type: "Event",
             title: title,
             descript: desc,
             date: date,
