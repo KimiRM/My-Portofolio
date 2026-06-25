@@ -24,9 +24,14 @@ const AddSectionEventBtn = document.getElementById('AddSection-AddEvent');
 
 const AddSectionTask_Title = document.getElementById('AddSectionTask-TitleInput');
 const AddSectionTask_Desc = document.getElementById('AddSectionTask-DescInput');
+const AddSectionTask_StartTime = document.getElementById('AddSectionTask-StartTime-input');
+const AddSectionTask_EndTime = document.getElementById('AddSectionTask-EndTime-input');
+
 
 const AddSectionEvent_Title = document.getElementById('AddSectionEvent-TitleInput');
 const AddSectionEvent_Desc = document.getElementById('AddSectionEvent-DescInput');
+const AddSectionEvent_Date = document.getElementById('AddSectionEvent-Date-input');
+
 
 const AddSectionAddBtn = document.getElementById('AddSection-AddBtn');
 const AddSectionCloseBtn = document.getElementById('AddSection-CloseBtn');
@@ -41,6 +46,7 @@ class TodoAPP{
         this.$LastEventID = 0;
     }
 
+    //  ==================     Add Task/Event     ==================
     AddToDo = () =>{
         AddSection.style.display = "block";
 
@@ -68,8 +74,10 @@ class TodoAPP{
         try{
             const t = AddSectionTask_Title.value;
             const d = AddSectionTask_Desc.value;
+            const st = AddSectionTask_StartTime.value;
+            const et = AddSectionTask_EndTime.value;
 
-            this._CreatTask(t,d);
+            this._CreatTask(t,d,st,et);
             console.log(this.$TaskList);
             this._CloseAddSection();
 
@@ -105,8 +113,9 @@ class TodoAPP{
         try{
             const t = AddSectionEvent_Title.value;
             const d = AddSectionEvent_Desc.value;
+            const date = AddSectionEvent_Date.value;
 
-            this._CreatEvent(t,d);
+            this._CreatEvent(t,d,date);
             console.log(this.$EventList);
             this._CloseAddSection();
 
