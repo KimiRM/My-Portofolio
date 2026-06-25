@@ -45,8 +45,11 @@ class TodoAPP{
         AddSection.style.display = "block";
 
         AddSectionTaskBtn.removeEventListener('click' , this._AddTodo_Task);
+        AddSectionEventBtn.removeEventListener('click' , this._AddTodo_Event);
 
         AddSectionTaskBtn.addEventListener('click' , this._AddTodo_Task);
+        AddSectionEventBtn.addEventListener('click' , this._AddTodo_Event);
+
         
     }
     _AddTodo_Task = () =>{
@@ -79,6 +82,7 @@ class TodoAPP{
         AddSectionTask_Desc.value = "";
         AddSection.style.display = "none";
         AddSectionTaskDiv.style.display = "none";
+        AddSectionFooter.style.display = "none";
     }
 
     _AddTodo_Event = () =>{
