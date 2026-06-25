@@ -13,6 +13,8 @@ const AddSectionTaskDiv = document.getElementById('AddSectionTask');
 AddSectionTaskDiv.style.display = "none";
 const AddSectionEventDiv = document.getElementById('AddSectionEvent');
 AddSectionEventDiv.style.display = "none";
+const AddSectionFooter = document.getElementById('AddSectionFooter');
+AddSectionFooter.style.display = "none";
 const AddSectionAddBtn = document.getElementById('AddSection-AddBtn');
 const AddSectionCloseBtn = document.getElementById('AddSection-CloseBtn');
 const AddSectionTask_Title = document.getElementById('AddSectionTask-TitleInput');
@@ -31,7 +33,15 @@ class TodoAPP{
 
     AddToDo = () =>{
         AddSection.style.display = "block";
+
+        AddSectionTaskBtn.removeEventListener('click' , this._AddTodo_Task);
+
+        AddSectionTaskBtn.addEventListener('click' , this._AddTodo_Task);
+        
+    }
+    _AddTodo_Task = () =>{
         AddSectionTaskDiv.style.display = "block";
+        AddSectionFooter.style.display = "block";
 
         AddSectionAddBtn.removeEventListener('click', this._AddTask);
         AddSectionCloseBtn.removeEventListener('click', this._CloseAddSection);
