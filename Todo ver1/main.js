@@ -47,6 +47,7 @@ class TodoAPP{
 
             this._CreatTask(t,d);
             console.log(this.$TaskList);
+            this._CloseAddSection();
 
         }catch(err){
             console.log(err.message);
