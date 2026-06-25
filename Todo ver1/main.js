@@ -36,7 +36,15 @@ const AddSectionEvent_Date = document.getElementById('AddSectionEvent-Date-input
 const AddSectionAddBtn = document.getElementById('AddSection-AddBtn');
 const AddSectionCloseBtn = document.getElementById('AddSection-CloseBtn');
 
+const now = moment().format('YYYY-MM-DDTHH:mm');
+document.getElementById('AddSectionTask-StartTime-input').value = now;
+document.getElementById('AddSectionTask-EndTime-input').value = now;
+document.getElementById('AddSectionEvent-Date-input').value = now;
 
+
+
+
+// ======================    Todo Main Class    ======================
 
 class TodoAPP{
     constructor(){
