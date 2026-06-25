@@ -55,6 +55,7 @@ class TodoAPP{
     _AddTodo_Task = () =>{
         AddSectionTaskDiv.style.display = "block";
         AddSectionFooter.style.display = "block";
+        AddSectionEventDiv.style.display = "none";
 
         AddSectionAddBtn.removeEventListener('click', this._AddTask);
         AddSectionCloseBtn.removeEventListener('click', this._CloseAddSection);
@@ -80,14 +81,18 @@ class TodoAPP{
     _CloseAddSection = ()=>{
         AddSectionTask_Title.value ="" ;
         AddSectionTask_Desc.value = "";
+        AddSectionEvent_Title.value ="" ;
+        AddSectionEvent_Desc.value = "";
         AddSection.style.display = "none";
         AddSectionTaskDiv.style.display = "none";
+        AddSectionEventDiv.style.display = "none";
         AddSectionFooter.style.display = "none";
     }
 
     _AddTodo_Event = () =>{
         AddSectionEventDiv.style.display = "block";
         AddSectionFooter.style.display = "block";
+        AddSectionTaskDiv.style.display = "none";
 
         AddSectionAddBtn.removeEventListener('click', this._AddEvent);
         AddSectionCloseBtn.removeEventListener('click', this._CloseAddSection);
