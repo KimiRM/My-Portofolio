@@ -43,8 +43,7 @@ const AddSectionCloseBtn = document.getElementById('AddSection-CloseBtn');
 
 class TodoAPP{
     constructor(){
-        this.$TaskList = [];
-        this.$EventList = [];
+        this.$Activities = [];
         this.$LastTaskID = 0;
         this.$LastEventID = 0;
     }
@@ -155,7 +154,7 @@ class TodoAPP{
             Start: start,
             End: end
         };
-        this.$TaskList.push(newTask);
+        this.$Activities.push(newTask);
     }
 
     _CreatEvent(title="Undefined",desc="",date=moment().format("YYYYMMDD"),dur=0){
@@ -167,11 +166,12 @@ class TodoAPP{
             date: date,
             duration: dur
         };
-        this.$EventList.push(newEvent);
+        this.$Activities.push(newEvent);
     }
 
     _ShowActivities = ()=>{
         const table = document.createElement('table');
+        this._CreateTableHeader(table, "Title" , "Date" ,"Description")
         const tbody = document.createElement('tbody');
         
     }
@@ -197,6 +197,8 @@ class TodoAPP{
         }
         obj.appendChild(tr);
     }
+
+    
 
     
 }
