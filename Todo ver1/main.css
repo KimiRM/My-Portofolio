@@ -18,3 +18,17 @@ body {
     font-style: normal;
 }
 
+#TodoTable {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+}
+
+#RightMenu , #LeftMenu , #TaskEventTable {
+    border: 1px solid black;
+    width: 30%;
+    height: 300px;
+}
+
