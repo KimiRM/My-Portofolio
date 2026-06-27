@@ -176,13 +176,18 @@ class TodoAPP{
     }
     _CreateHeader(obj,...colNames){
         const thead = document.createElement('thead');
-        for(s of colNames) {
-            const col = documet.createElement('thead');
-            col.value = s;
-            thead.appendChild(col);
+        const tr = document.createElement('tr');
+
+        for(let s of colNames) {
+            const col = documet.createElement('th');
+            col.textContent = s;
+            tr.appendChild(col);
         }
+        thead.appendChild(tr);
         obj.appendChild(thead);
     }
+
+    
 }
 
 function Setup(){
