@@ -173,6 +173,12 @@ class TodoAPP{
         const table = document.createElement('table');
         this._CreateTableHeader(table, "Title" , "Date" ,"Description")
         const tbody = document.createElement('tbody');
+
+        const activities = this.__getSortedActivities();
+        for (let s of activities){
+            this._CreateTableBodyRows(tbody , )
+        }
+        
         
     }
     _CreateTableHeader(obj,...colNames){
@@ -197,6 +203,14 @@ class TodoAPP{
         }
         obj.appendChild(tr);
     }
+
+    __getSortedActivities() {
+        return [...this.activities].sort((a, b) => a.sortTime - b.sortTime);
+    }
+
+    
+
+    
 
     
 
