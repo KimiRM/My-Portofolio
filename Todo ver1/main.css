@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Murecho:wght@100..900&display=swap');
+
 .murecho-font {
   font-family: "Murecho", sans-serif;
   font-optical-sizing: auto;
@@ -7,5 +9,12 @@
 
 body {
     background-color: rgb(57, 149, 92);
+}
+
+#LandingHeader , #LandingSubHeader {
+    font-family: "Murecho", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
