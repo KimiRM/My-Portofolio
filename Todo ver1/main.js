@@ -208,7 +208,14 @@ class TodoAPP{
         return [...this.activities].sort((a, b) => a.sortTime - b.sortTime);
     }
 
-    
+    __ActivityToString(a){
+        if(a.type == "Task"){
+            return [a.Title , `Start: ${a.Start}\tEnd: ${a.End}` ,a.desc];
+        }
+        else{
+            return [a.Title , a.date ,a.desc];
+        }
+    }
 
     
 
