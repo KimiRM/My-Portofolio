@@ -27,14 +27,14 @@ const AddSectionTask_Desc = document.getElementById('AddSectionTask-DescInput');
 const AddSectionTask_StartTime = document.getElementById('AddSectionTask-StartTime-input');
 const AddSectionTask_EndTime = document.getElementById('AddSectionTask-EndTime-input');
 
-
 const AddSectionEvent_Title = document.getElementById('AddSectionEvent-TitleInput');
 const AddSectionEvent_Desc = document.getElementById('AddSectionEvent-DescInput');
 const AddSectionEvent_Date = document.getElementById('AddSectionEvent-Date-input');
 
-
 const AddSectionAddBtn = document.getElementById('AddSection-AddBtn');
 const AddSectionCloseBtn = document.getElementById('AddSection-CloseBtn');
+
+
 
 
 
@@ -170,6 +170,19 @@ class TodoAPP{
         this.$EventList.push(newEvent);
     }
 
+    _ShowActivities = ()=>{
+        const table = document.createElement('table');
+        
+    }
+    _CreateHeader(obj,...colNames){
+        const thead = document.createElement('thead');
+        for(s of colNames) {
+            const col = documet.createElement('thead');
+            col.value = s;
+            thead.appendChild(col);
+        }
+        obj.appendChild(thead);
+    }
 }
 
 function Setup(){
