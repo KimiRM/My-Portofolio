@@ -172,9 +172,10 @@ class TodoAPP{
 
     _ShowActivities = ()=>{
         const table = document.createElement('table');
+        const tbody = document.createElement('tbody');
         
     }
-    _CreateHeader(obj,...colNames){
+    _CreateTableHeader(obj,...colNames){
         const thead = document.createElement('thead');
         const tr = document.createElement('tr');
 
@@ -185,6 +186,16 @@ class TodoAPP{
         }
         thead.appendChild(tr);
         obj.appendChild(thead);
+    }
+
+    _CreateTableBodyRows(obj,...colValues){
+        const tr = document.createElement('tr');
+        for (let s of colValues){
+            const col = documet.createElement('td');
+            col.textContent = s;
+            tr.appendChild(col);
+        }
+        obj.appendChild(tr);
     }
 
     
