@@ -66,8 +66,12 @@ class TodoAPP{
         AddSectionTask_EndTime.value = now;
         AddSectionEvent_Date.value = now;
 
+
         AddSectionTaskBtn.removeEventListener('click' , this._AddTodo_Task);
         AddSectionEventBtn.removeEventListener('click' , this._AddTodo_Event);
+
+        AddSectionCloseBtn.removeEventListener('click', this._CloseAddSection);
+        AddSectionCloseBtn.addEventListener('click' , this._CloseAddSection);
 
         AddSectionTaskBtn.addEventListener('click' , this._AddTodo_Task);
         AddSectionEventBtn.addEventListener('click' , this._AddTodo_Event);
@@ -106,11 +110,11 @@ class TodoAPP{
     }
 
     _CloseAddSection = ()=>{
-        Overlay.style.display = "none";
         AddSectionTask_Title.value ="" ;
         AddSectionTask_Desc.value = "";
         AddSectionEvent_Title.value ="" ;
         AddSectionEvent_Desc.value = "";
+        Overlay.style.display = "none";
         AddSection.style.display = "none";
         AddSectionTaskDiv.style.display = "none";
         AddSectionEventDiv.style.display = "none";
@@ -250,5 +254,10 @@ class TodoAPP{
 function Setup(){
     const app = new TodoAPP;
     AddBtn.addEventListener('click',app.AddToDo);
+    Overlay.addEventListener('click', function(e) {
+        if (e.target === this) { // Only close if clicking the overlay itself
+            app._CloseAddSection();
+        }
+    });
 
 }

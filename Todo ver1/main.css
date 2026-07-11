@@ -1,3 +1,5 @@
+/* Color Palette : #9FA1FF, #B5BAFF , #AEE2FF , #D9F9DF ,#8140DC */
+
 @import url('https://fonts.googleapis.com/css2?family=Murecho:wght@100..900&display=swap');
 
 .murecho-font {
@@ -8,7 +10,7 @@
 }
 
 body {
-    background-color: rgb(57, 149, 92);
+    background-color: #9FA1FF;
 }
 
 #LandingHeader , #LandingSubHeader {
@@ -37,7 +39,6 @@ body {
     height: 300px;
 }
 
-/* Overlay - blurred background */
 #Overlay {
     display: none;
     position: fixed;
@@ -45,7 +46,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     z-index: 999;
