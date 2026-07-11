@@ -5,6 +5,7 @@ const EditBtn = document.getElementById('EditTodo');
 // =================   Table Section    ===================
 
 const TaskEventTable = document.getElementById('TaskEventTable');
+const TaskEventTable_table = document.getElementById('TaskEventTable-table');
 const TodoTable = document.getElementById('TodoTable');
 const TableRightMenu = document.getElementById('RightMenu');
 const TableLeftMenu = document.getElementById('LeftMenu');
@@ -68,7 +69,6 @@ class TodoAPP{
         const now = moment().format('YYYY-MM-DDTHH:mm');
         AddSectionTask_StartTime.value = now;
         AddSectionTask_EndTime.value = now;
-        console.log(`start time ${AddSectionTask_StartTime.value} and end time ${AddSectionTask_EndTime.value}`)
 
         AddSectionAddBtn.removeEventListener('click', this._AddTask);
         AddSectionCloseBtn.removeEventListener('click', this._CloseAddSection);
@@ -85,7 +85,6 @@ class TodoAPP{
             const et = AddSectionTask_EndTime.value;
 
             this._CreatTask(t,d,st,et);
-            console.log(this.$TaskList);
             this._CloseAddSection();
 
         }catch(err){
@@ -127,8 +126,8 @@ class TodoAPP{
 
 
             this._CreatEvent(t,d,date);
-            console.log(this.$EventList);
             this._CloseAddSection();
+
 
         }catch(err){
             console.log(err.message);
@@ -155,6 +154,7 @@ class TodoAPP{
             End: end
         };
         this.$Activities.push(newTask);
+        this._ShowActivities();
     }
 
     _CreatEvent(title="Undefined",desc="",date=moment().format("YYYYMMDD"),dur=0){
@@ -167,26 +167,30 @@ class TodoAPP{
             duration: dur
         };
         this.$Activities.push(newEvent);
+        this._ShowActivities();
     }
 
     _ShowActivities = ()=>{
+        TaskEventTable_table.value = "";
+
         const table = document.createElement('table');
-        this._CreateTableHeader(table, "Title" , "Date" ,"Description")
+        this._CreateTableHeader(table, ["Title" , "Date" ,"Description"])
         const tbody = document.createElement('tbody');
 
         const activities = this.__getSortedActivities();
-        for (let s of activities){
-            this._CreateTableBodyRows(tbody , )
+        for (let a of activities){
+            let aTostr = this.__ActivityToString(a);
+            this._CreateTableBodyRows(tbody ,aTostr);
         }
-        
-        
+        table.appendChild(tbody);
+        TaskEventTable_table.appendChild(table);
     }
-    _CreateTableHeader(obj,...colNames){
+    _CreateTableHeader(obj,colNames){
         const thead = document.createElement('thead');
         const tr = document.createElement('tr');
 
         for(let s of colNames) {
-            const col = documet.createElement('th');
+            const col = document.createElement('th');
             col.textContent = s;
             tr.appendChild(col);
         }
@@ -194,10 +198,10 @@ class TodoAPP{
         obj.appendChild(thead);
     }
 
-    _CreateTableBodyRows(obj,...colValues){
+    _CreateTableBodyRows(obj,colValues){
         const tr = document.createElement('tr');
         for (let s of colValues){
-            const col = documet.createElement('td');
+            const col = document.createElement('td');
             col.textContent = s;
             tr.appendChild(col);
         }
@@ -205,15 +209,15 @@ class TodoAPP{
     }
 
     __getSortedActivities() {
-        return [...this.activities].sort((a, b) => a.sortTime - b.sortTime);
+        return [...this.$Activities].sort((a, b) => a.sortTime - b.sortTime);
     }
 
     __ActivityToString(a){
         if(a.type == "Task"){
-            return [a.Title , `Start: ${a.Start}\tEnd: ${a.End}` ,a.desc];
+            return [a.title , `Start: ${a.Start}\tEnd: ${a.End}` ,a.descript];
         }
         else{
-            return [a.Title , a.date ,a.desc];
+            return [a.title , `${a.date}` ,a.descript];
         }
     }
 
