@@ -10,6 +10,9 @@ const TodoTable = document.getElementById('TodoTable');
 const TableRightMenu = document.getElementById('RightMenu');
 const TableLeftMenu = document.getElementById('LeftMenu');
 
+// =================   OverLay Section    ===================
+const Overlay = document.getElementById('Overlay');
+
 // =================   Add Section    ===================
 const AddSection = document.getElementById('AddSection');
 AddSection.style.display = "none";
@@ -51,7 +54,17 @@ class TodoAPP{
 
     //  ==================     Add Task/Event     ==================
     AddToDo = () =>{
+        Overlay.style.display = "block";
         AddSection.style.display = "block";
+
+        AddSectionTaskDiv.style.display = "block";
+        AddSectionEventDiv.style.display = "none";
+        AddSectionFooter.style.display = "block";
+
+        const now = moment().format('YYYY-MM-DDTHH:mm');
+        AddSectionTask_StartTime.value = now;
+        AddSectionTask_EndTime.value = now;
+        AddSectionEvent_Date.value = now;
 
         AddSectionTaskBtn.removeEventListener('click' , this._AddTodo_Task);
         AddSectionEventBtn.removeEventListener('click' , this._AddTodo_Event);
@@ -93,6 +106,7 @@ class TodoAPP{
     }
 
     _CloseAddSection = ()=>{
+        Overlay.style.display = "none";
         AddSectionTask_Title.value ="" ;
         AddSectionTask_Desc.value = "";
         AddSectionEvent_Title.value ="" ;
