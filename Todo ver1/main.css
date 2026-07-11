@@ -1,4 +1,5 @@
-/* Color Palette : #9FA1FF, #B5BAFF , #AEE2FF , #D9F9DF ,#8140DC */
+/* Color Palette : #9FA1FF, #B5BAFF , #AEE2FF , #D9F9DF ,#f2fffd
+ ,#8140DC */
 
 @import url('https://fonts.googleapis.com/css2?family=Murecho:wght@100..900&display=swap');
 
@@ -26,6 +27,7 @@ body {
     width: 90%;
     justify-content: center;
     align-items: center;
+    background-color: #f2fffd;
 }
 
 #RightMenu , #LeftMenu {
@@ -72,4 +74,18 @@ body {
 #TodoTable {
     position: relative;
     z-index: 1;
+}
+
+#AddSection-AddEvent , #AddSection-AddTask{
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border-bottom: 3px solid #9FA1FF;
+    box-shadow: none;
+}
+#AddSection-AddEvent:hover , #AddSection-AddTask:hover{
+    background: #9FA1FF;
+    transition: 0.5s ease;
 }

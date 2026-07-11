@@ -193,7 +193,7 @@ class TodoAPP{
         TaskEventTable_table.innerHTML = "";
 
         const table = document.createElement('table');
-        this._CreateTableHeader(table, ["Title" , "Date" ,"Description"])
+        this._CreateTableHeader(table, ["","Title" , "Date" ,"Description"])
         const tbody = document.createElement('tbody');
 
         const activities = this.__getSortedActivities();
@@ -243,12 +243,6 @@ class TodoAPP{
             return [a.title , `${date}` ,a.descript];
         }
     }
-
-    
-
-    
-
-    
 }
 
 function Setup(){
@@ -259,5 +253,6 @@ function Setup(){
             app._CloseAddSection();
         }
     });
+    app._ShowActivities();
 
 }
