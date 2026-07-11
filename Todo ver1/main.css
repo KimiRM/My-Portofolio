@@ -26,9 +26,13 @@ body {
     align-items: center;
 }
 
-#RightMenu , #LeftMenu , #TaskEventTable {
+#RightMenu , #LeftMenu {
     border: 1px solid black;
-    width: 30%;
+    width: 10%;
     height: 300px;
 }
-
+#TaskEventTable {
+    border: 1px solid black;
+    width: 80%;
+    height: 300px;
+}

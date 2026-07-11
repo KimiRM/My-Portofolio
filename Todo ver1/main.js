@@ -126,6 +126,7 @@ class TodoAPP{
 
 
             this._CreatEvent(t,d,date);
+            console.log(this.$Activities);
             this._CloseAddSection();
 
 
@@ -134,19 +135,19 @@ class TodoAPP{
         }
     }
 
-    _AssignTaskID(Task){
+    _AssignTaskID(){
         this.$LastTaskID++;
         return this.$LastTaskID;
     }
 
-    _AssignEventID(Event){
+    _AssignEventID(){
         this.$LastEventID++;
         return this.$LastEventID;
     }
 
     _CreatTask(title="Undefined",desc="",start=moment().format("YYYYMMDD"),end=moment().format("YYYYMMDD")){
         const newTask = {
-            id: this._AssignTaskID(this),
+            id: this._AssignTaskID(),
             type: "Task",
             title: title,
             descript: desc,
@@ -159,7 +160,7 @@ class TodoAPP{
 
     _CreatEvent(title="Undefined",desc="",date=moment().format("YYYYMMDD"),dur=0){
         const newEvent = {
-            id: this._AssignEventID(this),
+            id: this._AssignEventID(),
             type: "Event",
             title: title,
             descript: desc,
@@ -171,7 +172,7 @@ class TodoAPP{
     }
 
     _ShowActivities = ()=>{
-        TaskEventTable_table.value = "";
+        TaskEventTable_table.innerHTML = "";
 
         const table = document.createElement('table');
         this._CreateTableHeader(table, ["Title" , "Date" ,"Description"])
@@ -200,6 +201,7 @@ class TodoAPP{
 
     _CreateTableBodyRows(obj,colValues){
         const tr = document.createElement('tr');
+        console.log('input : ',colValues);
         for (let s of colValues){
             const col = document.createElement('td');
             col.textContent = s;
@@ -214,10 +216,13 @@ class TodoAPP{
 
     __ActivityToString(a){
         if(a.type == "Task"){
-            return [a.title , `Start: ${a.Start}\tEnd: ${a.End}` ,a.descript];
+            const start = moment(a.Start).format('MMM DD, HH:mm');
+            const end = moment(a.End).format('MMM DD, HH:mm');
+            return [a.title , `Start: ${start}    End: ${end}` ,a.descript];
         }
         else{
-            return [a.title , `${a.date}` ,a.descript];
+            const date = moment(a.date).format('MMM DD, HH:mm');
+            return [a.title , `${date}` ,a.descript];
         }
     }
 
