@@ -69,6 +69,8 @@ body {
     width: 90%;
     max-height: 90vh;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 #TodoTable {
@@ -88,4 +90,40 @@ body {
 #AddSection-AddEvent:hover , #AddSection-AddTask:hover{
     background: #9FA1FF;
     transition: 0.5s ease;
+}
+
+#AddSectionFooter{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+    margin: 0 auto;
+}
+
+ #AddSection-AddBtn ,#AddSection-CloseBtn{
+    background-color: #9FA1FF;
+    font-size: 23px;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    border-bottom: 3px solid #9FA1FF;
+    box-shadow: none;
+ }
+/* #AddSection-AddBtn:hover , #AddSection-CloseBtn:hover{
+    
+} */
+
+#AddSectionTask-Title , #AddSectionEvent-Title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+input{
+    border: none;
+    background-color: transparent;
+
 }

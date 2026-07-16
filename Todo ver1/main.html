@@ -1,88 +1,109 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Murecho:wght@100..900&display=swap" rel="stylesheet">
-</head>
-<body onload="Setup()">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Murecho:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body onload="Setup()">
     <div id="LandingWelcome">
-        <h1 id="LandingHeader">Your <span id="LandingHeaderStrikeOut">TODO</span> List</h1>
-        <h4 id="LandingSubHeader">Manage your tasks and events</h4>
+      <h1 id="LandingHeader">
+        Your <span id="LandingHeaderStrikeOut">TODO</span> List
+      </h1>
+      <h4 id="LandingSubHeader">Manage your tasks and events</h4>
     </div>
 
     <div id="TodoTable">
-        <!-- left menu contains calender and search -->
-        <div id="LeftMenu">
-
-        </div>
-        <div id="TaskEventTable">
-            <div id="TaskEventTable-table">
-
-            </div>
-        </div>
-        <!-- right menu contains add , delete , edit -->
-        <div id="RightMenu">
-            <button id="AddTodo">Add</button>
-            <button id="DeleteTodo">Delete</button>
-            <button id="EditTodo">Edit</button>
-        </div>
+      <!-- left menu contains calender and search -->
+      <div id="LeftMenu"></div>
+      <div id="TaskEventTable">
+        <div id="TaskEventTable-table"></div>
+      </div>
+      <!-- right menu contains add , delete , edit -->
+      <div id="RightMenu">
+        <button id="AddTodo">Add</button>
+        <button id="DeleteTodo">Delete</button>
+        <button id="EditTodo">Edit</button>
+      </div>
     </div>
-
 
     <div id="Overlay"></div>
     <div id="AddSection">
-        <div id="AddSectionHeader">
-            <button id="AddSection-AddTask">Task</button>
-            <button id="AddSection-AddEvent">Event</button>
-        </div>
+      <div id="AddSectionHeader">
+        <button id="AddSection-AddTask">Task</button>
+        <button id="AddSection-AddEvent">Event</button>
+      </div>
+      <div id="AddSectionBodyLayer">
         <div id="AddSectionTask">
-            <div id="AddSectionTask-Title">
-                <h3>Title: </h3>
-                <input id="AddSectionTask-TitleInput" placeholder="Title" type="text">
+          <div id="AddSectionTask-Title">
+            <h3>Title:</h3>
+            <input
+              id="AddSectionTask-TitleInput"
+              placeholder="Title"
+              type="text"
+            />
+          </div>
+          <div id="AddSectionTask-desc">
+            <h3>Description:</h3>
+            <textarea
+              id="AddSectionTask-DescInput"
+              rows="4"
+              cols="50"
+            ></textarea>
+          </div>
+          <div id="AddSectionTask-Time">
+            <div id="AddSectionTask-StartTime">
+              <label>Start Time : </label>
+              <input
+                type="datetime-local"
+                id="AddSectionTask-StartTime-input"
+              />
             </div>
-            <div id="AddSectionTask-desc">
-                <h3>Description: </h3>
-                <textarea id="AddSectionTask-DescInput" rows="4" cols="50"></textarea>
+            <div id="AddSectionTask-EndTime">
+              <label>End Time : </label>
+              <input type="datetime-local" id="AddSectionTask-EndTime-input" />
             </div>
-            <div id="AddSectionTask-Time">
-                <div id="AddSectionTask-StartTime">
-                    <label>Start Time : </label>
-                    <input type="datetime-local" id="AddSectionTask-StartTime-input" >
-                </div>
-                <div id="AddSectionTask-EndTime">
-                    <label>End Time : </label>
-                    <input type="datetime-local" id="AddSectionTask-EndTime-input">
-                </div>
-            </div>
+          </div>
         </div>
         <div id="AddSectionEvent">
-            <div id="AddSectionEvent-Title">
-                <h3>Title: </h3>
-                <input id="AddSectionEvent-TitleInput" placeholder="Title" type="text">
+          <div id="AddSectionEvent-Title">
+            <h3>Title:</h3>
+            <input
+              id="AddSectionEvent-TitleInput"
+              placeholder="Title"
+              type="text"
+            />
+          </div>
+          <div id="AddSectionEvent-desc">
+            <h3>Description:</h3>
+            <textarea
+              id="AddSectionEvent-DescInput"
+              rows="4"
+              cols="50"
+            ></textarea>
+          </div>
+          <div id="AddSectionEvent-Time">
+            <div id="AddSectionEvent-Date">
+              <label>Date : </label>
+              <input type="datetime-local" id="AddSectionEvent-Date-input" />
             </div>
-            <div id="AddSectionEvent-desc">
-                <h3>Description: </h3>
-                <textarea id="AddSectionEvent-DescInput" rows="4" cols="50"></textarea>
-            </div>
-            <div id="AddSectionEvent-Time">
-                <div id="AddSectionEvent-Date">
-                    <label>Date : </label>
-                    <input type="datetime-local" id="AddSectionEvent-Date-input" >
-                </div>
-            </div>
+          </div>
         </div>
-        <div id="AddSectionFooter">
-            <button id="AddSection-AddBtn">Add</button>
-            <button id="AddSection-CloseBtn">Close</button>
-        </div>
+      </div>
+      <div id="AddSectionFooter">
+        <button id="AddSection-AddBtn">Add</button>
+        <button id="AddSection-CloseBtn">Close</button>
+      </div>
     </div>
 
     <script src="main.js"></script>
-</body>
+  </body>
 </html>
