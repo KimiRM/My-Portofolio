@@ -50,6 +50,8 @@ class TodoAPP{
         this.$Activities = [];
         this.$LastTaskID = 0;
         this.$LastEventID = 0;
+
+        const styler = Styler();
     }
 
     //  ==================     Add Task/Event     ==================
