@@ -51,7 +51,7 @@ class TodoAPP{
         this.$LastTaskID = 0;
         this.$LastEventID = 0;
 
-        const styler = Styler();
+       this.styler = new Styler();
     }
 
     //  ==================     Add Task/Event     ==================
@@ -204,8 +204,10 @@ class TodoAPP{
             this._CreateTableBodyRows(tbody ,aTostr);
         }
         table.appendChild(tbody);
+        this.styler.styleTable(table);
         TaskEventTable_table.appendChild(table);
     }
+
     _CreateTableHeader(obj,colNames){
         const thead = document.createElement('thead');
         const tr = document.createElement('tr');
