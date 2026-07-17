@@ -237,11 +237,11 @@ class TodoAPP{
         if(a.type == "Task"){
             const start = moment(a.Start).format('MMM DD, HH:mm');
             const end = moment(a.End).format('MMM DD, HH:mm');
-            return [a.title , `Start: ${start}    End: ${end}` ,a.descript];
+            return ["",a.title , `Start: ${start}    End: ${end}` ,a.descript];
         }
         else{
             const date = moment(a.date).format('MMM DD, HH:mm');
-            return [a.title , `${date}` ,a.descript];
+            return ["",a.title , `${date}` ,a.descript];
         }
     }
 }
