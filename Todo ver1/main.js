@@ -78,6 +78,15 @@ class TodoAPP{
         AddSectionTaskBtn.addEventListener('click' , this._AddTodo_Task);
         AddSectionEventBtn.addEventListener('click' , this._AddTodo_Event);
 
+        AddSectionTaskBtn.removeEventListener('click' , this._AddTask);
+        AddSectionEventBtn.removeEventListener('click' , this._AddEvent);
+
+        if(AddSectionTaskDiv.style.display == "block"){
+            AddSectionAddBtn.addEventListener('click' , this._AddTask);
+        }
+        else{
+            AddSectionAddBtn.addEventListener('click' , this._AddEvent);
+        }
         
     }
     _AddTodo_Task = () =>{
@@ -88,12 +97,6 @@ class TodoAPP{
         const now = moment().format('YYYY-MM-DDTHH:mm');
         AddSectionTask_StartTime.value = now;
         AddSectionTask_EndTime.value = now;
-
-        AddSectionAddBtn.removeEventListener('click', this._AddTask);
-        AddSectionCloseBtn.removeEventListener('click', this._CloseAddSection);
-
-        AddSectionAddBtn.addEventListener('click' , this._AddTask);
-        AddSectionCloseBtn.addEventListener('click' , this._CloseAddSection);
     }
 
     _AddTask = ()=> {
@@ -130,12 +133,6 @@ class TodoAPP{
 
         const now = moment().format('YYYY-MM-DDTHH:mm');
         AddSectionEvent_Date.value = now;
-
-        AddSectionAddBtn.removeEventListener('click', this._AddEvent);
-        AddSectionCloseBtn.removeEventListener('click', this._CloseAddSection);
-
-        AddSectionAddBtn.addEventListener('click' , this._AddEvent);
-        AddSectionCloseBtn.addEventListener('click' , this._CloseAddSection);
     }
     
     _AddEvent = ()=> {
