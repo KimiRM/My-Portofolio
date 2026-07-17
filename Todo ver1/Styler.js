@@ -12,13 +12,17 @@ class Styler{
             this.styleTh(th,);
         }
 
-
     }
 
     styleTbody = (table,tbody) => {
         const all_cells = table.querySelectorAll('td');
         for(let td of all_cells){
             this.styleTd(td);
+        }
+
+        const all_rows = table.querySelectorAll('tr');
+        for (let tr of all_rows){
+            this.styleTr(tr);
         }
     }
 
@@ -32,5 +36,9 @@ class Styler{
     styleTd = (td ,border_width = "1px" ,type = "solid" ,color="#ddd" ,padding="12px 16px") => {
         td.style.border= `${border_width} ${type} ${color}`;
         td.style.padding= padding;
+    }
+
+    styleTr = (tr) =>{
+        tr.style.cursor = "pointer";
     }
 }

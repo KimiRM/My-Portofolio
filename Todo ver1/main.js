@@ -196,10 +196,16 @@ class TodoAPP{
         const tbody = document.createElement('tbody');
 
         const activities = this.__getSortedActivities();
+
         for (let a of activities){
             let aTostr = this.__ActivityToString(a);
-            this._CreateTableBodyRows(tbody ,aTostr);
+            const row = this._CreateTableBodyRows(tbody, aTostr);
+
+            row.addEventListener('dblclick', () => {
+                this._EditActivity(row, a);
+            });
         }
+
         table.appendChild(tbody);
         this.styler.styleTable(table);
         TaskEventTable_table.appendChild(table);
@@ -220,13 +226,21 @@ class TodoAPP{
 
     _CreateTableBodyRows(obj,colValues){
         const tr = document.createElement('tr');
-        console.log('input : ',colValues);
+        this.__createCheckBox(tr);
+
         for (let s of colValues){
             const col = document.createElement('td');
             col.textContent = s;
             tr.appendChild(col);
         }
         obj.appendChild(tr);
+        return tr;
+    }
+
+    __createCheckBox(obj){
+        const cb = document.createElement('input');
+        cb.type = "checkbox";
+        obj.appendChild(cb);
     }
 
     __getSortedActivities() {
@@ -240,11 +254,105 @@ class TodoAPP{
         if(a.type == "Task"){
             const start = moment(a.Start).format('MMM DD, HH:mm');
             const end = moment(a.End).format('MMM DD, HH:mm');
-            return ["",a.title , `Start: ${start}    End: ${end}` ,a.descript];
+            return [a.title , `Start: ${start}    End: ${end}` ,a.descript];
         }
         else{
             const date = moment(a.date).format('MMM DD, HH:mm');
-            return ["",a.title , `${date}` ,a.descript];
+            return [a.title , `${date}` ,a.descript];
+        }
+    }
+
+    _EditActivity = (row, activity) => {
+        Overlay.style.display = "block";
+        AddSection.style.display = "block";
+        AddSectionFooter.style.display = "block";
+
+        if (activity.type === "Task") {
+            AddSectionTaskDiv.style.display = "block";
+            AddSectionEventDiv.style.display = "none";
+
+            AddSectionTask_Title.value = activity.title;
+            AddSectionTask_Desc.value = activity.descript;
+            AddSectionTask_StartTime.value = moment(activity.Start).format('YYYY-MM-DDTHH:mm');
+            AddSectionTask_EndTime.value = moment(activity.End).format('YYYY-MM-DDTHH:mm');
+            
+            AddSectionAddBtn.textContent = "Update";
+
+            AddSectionAddBtn.removeEventListener('click', this._AddTask);
+            AddSectionAddBtn.removeEventListener('click', this._AddEvent);
+            AddSectionAddBtn.removeEventListener('click', this._UpdateTask);
+            AddSectionAddBtn.addEventListener('click', () => this._UpdateTask(activity.id));
+            
+        } else {
+            AddSectionEventDiv.style.display = "block";
+            AddSectionTaskDiv.style.display = "none";
+
+            AddSectionEvent_Title.value = activity.title;
+            AddSectionEvent_Desc.value = activity.descript;
+            AddSectionEvent_Date.value = moment(activity.date).format('YYYY-MM-DDTHH:mm');
+        
+            AddSectionAddBtn.textContent = "Update";
+
+            AddSectionAddBtn.removeEventListener('click', this._AddTask);
+            AddSectionAddBtn.removeEventListener('click', this._AddEvent);
+            AddSectionAddBtn.removeEventListener('click', this._UpdateEvent);
+            AddSectionAddBtn.addEventListener('click', () => this._UpdateEvent(activity.id));
+        }
+
+        AddSectionTaskBtn.removeEventListener('click', this._AddTodo_Task);
+        AddSectionEventBtn.removeEventListener('click', this._AddTodo_Event);
+        AddSectionTaskBtn.addEventListener('click', this._AddTodo_Task);
+        AddSectionEventBtn.addEventListener('click', this._AddTodo_Event);
+
+        AddSectionCloseBtn.removeEventListener('click', this._CloseAddSection);
+        AddSectionCloseBtn.addEventListener('click', () => {
+            AddSectionAddBtn.textContent = "Add";
+            this._CloseAddSection();
+        });
+    }
+
+    _UpdateTask = (id) => {
+        try {
+            const t = AddSectionTask_Title.value;
+            const d = AddSectionTask_Desc.value;
+            const st = AddSectionTask_StartTime.value;
+            const et = AddSectionTask_EndTime.value;
+
+            const index = this.$Activities.findIndex(a => a.id === id && a.type === "Task");
+            if (index !== -1) {
+                this.$Activities[index].title = t;
+                this.$Activities[index].descript = d;
+                this.$Activities[index].Start = st;
+                this.$Activities[index].End = et;
+            }
+            
+            AddSectionAddBtn.textContent = "Add";
+            this._CloseAddSection();
+            this._ShowActivities();
+            
+        } catch(err) {
+            console.log(err.message);
+        }
+    }
+    _UpdateEvent = (id) => {
+        try {
+            const t = AddSectionEvent_Title.value;
+            const d = AddSectionEvent_Desc.value;
+            const date = AddSectionEvent_Date.value;
+
+            const index = this.$Activities.findIndex(a => a.id === id && a.type === "Event");
+            if (index !== -1) {
+                this.$Activities[index].title = t;
+                this.$Activities[index].descript = d;
+                this.$Activities[index].date = date;
+            }
+            
+            AddSectionAddBtn.textContent = "Add";
+            this._CloseAddSection();
+            this._ShowActivities();
+            
+        } catch(err) {
+            console.log(err.message);
         }
     }
 }
