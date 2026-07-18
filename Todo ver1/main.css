@@ -34,13 +34,13 @@ body {
 
 #RightMenu , #LeftMenu {
     border: 1px solid black;
-    width: 10%;
-    height: 300px;
+    width: 40%;
+    height: 430px;
 }
 #TaskEventTable {
     border: 1px solid black;
     width: 80%;
-    height: 300px;
+    height: 430px;
 }
 
 #Overlay {
@@ -133,4 +133,116 @@ input , textarea{
 
 #DeleteTodo{
     display: none;
+}
+
+/* Calendar Layout */
+.calendar-wrapper {
+    padding: 15px;
+    margin: 10px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Header */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.calendar-month-year {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.calendar-nav-btn {
+    background: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 12px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.calendar-nav-btn:hover {
+    background: #e0e0e0;
+}
+
+/* Grid */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 10px;
+}
+
+.calendar-day-name {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 0;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    position: relative;
+}
+
+.calendar-day.empty {
+    cursor: default;
+}
+
+/* Legend */
+.calendar-legend {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+}
+
+.legend-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+/* Buttons */
+.clear-filter-btn {
+    display: block;
+    width: calc(100% - 20px);
+    margin: 10px;
+    padding: 10px;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.clear-filter-btn:hover {
+    background: #e0e0e0;
+}
+
+/* Left menu scroll */
+#LeftMenu {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
 }
