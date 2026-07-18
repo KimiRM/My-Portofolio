@@ -53,6 +53,7 @@ class TodoAPP{
         this.$SelectedItems = [];
 
        this.styler = new Styler();
+       DeleteBtn.addEventListener('click' , this._DelteItems);
     }
 
     //  ==================     Add Task/Event     ==================
@@ -254,7 +255,6 @@ class TodoAPP{
         }
 
         this._ShowDeleteBtn();
-        console.log(this.$SelectedItems);
     }
     _ShowDeleteBtn = () => {
         if (this.$SelectedItems.length ==0){
@@ -268,11 +268,15 @@ class TodoAPP{
         }
     }
 
-    _DelteItems(){
-        this.$Activities = this.$Activities.filter ( a => {
-            return !this.$SelectedItems.some(m => m == a.id);
-        })
-        this.$SelectedItems = [];
+    _DelteItems = () => {
+        if(window.confirm("Are you sure you want to delete items?")){
+            this.$Activities = this.$Activities.filter ( a => {
+                return !this.$SelectedItems.some(m => m == a.id);
+            })
+            this.$SelectedItems = [];
+            this._ShowDeleteBtn();
+            this._ShowActivities();
+        }
     }
 
     __getSortedActivities() {
