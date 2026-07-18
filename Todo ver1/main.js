@@ -48,8 +48,9 @@ const AddSectionCloseBtn = document.getElementById('AddSection-CloseBtn');
 class TodoAPP{
     constructor(){
         this.$Activities = [];
-        this.$LastTaskID = 0;
-        this.$LastEventID = 0;
+        this.$LastID = 0;
+
+        this.$SelectedItems = [];
 
        this.styler = new Styler();
     }
@@ -152,19 +153,14 @@ class TodoAPP{
         }
     }
 
-    _AssignTaskID(){
-        this.$LastTaskID++;
-        return this.$LastTaskID;
-    }
-
-    _AssignEventID(){
-        this.$LastEventID++;
-        return this.$LastEventID;
+    _AssignID(){
+        this.$LastID++;
+        return this.$LastID;
     }
 
     _CreatTask(title="Undefined",desc="",start=moment().format("YYYYMMDD"),end=moment().format("YYYYMMDD")){
         const newTask = {
-            id: this._AssignTaskID(),
+            id: this._AssignID(),
             type: "Task",
             title: title,
             descript: desc,
@@ -177,7 +173,7 @@ class TodoAPP{
 
     _CreatEvent(title="Undefined",desc="",date=moment().format("YYYYMMDD"),dur=0){
         const newEvent = {
-            id: this._AssignEventID(),
+            id: this._AssignID(),
             type: "Event",
             title: title,
             descript: desc,
@@ -199,7 +195,7 @@ class TodoAPP{
 
         for (let a of activities){
             let aTostr = this.__ActivityToString(a);
-            const row = this._CreateTableBodyRows(tbody, aTostr);
+            const row = this._CreateTableBodyRows(tbody, aTostr , a.id);
 
             row.addEventListener('dblclick', () => {
                 this._EditActivity(row, a);
@@ -224,9 +220,9 @@ class TodoAPP{
         obj.appendChild(thead);
     }
 
-    _CreateTableBodyRows(obj,colValues){
+    _CreateTableBodyRows(obj,colValues,id){
         const tr = document.createElement('tr');
-        this.__createCheckBox(tr);
+        this.__createCheckBox(tr,id);
 
         for (let s of colValues){
             const col = document.createElement('td');
@@ -237,10 +233,46 @@ class TodoAPP{
         return tr;
     }
 
-    __createCheckBox(obj){
+    __createCheckBox(obj,id){
         const cb = document.createElement('input');
         cb.type = "checkbox";
+        cb.id = id;
+
+        cb.addEventListener('change', () => {
+            this._UpdateSelectedItems(cb.id);
+        });
+
         obj.appendChild(cb);
+    }
+
+    _UpdateSelectedItems = (id) => {
+        if(this.$SelectedItems.some(a => a == id)){
+            this.$SelectedItems = this.$SelectedItems.filter(a => a != id);
+        }
+        else{
+            this.$SelectedItems.push(id);
+        }
+
+        this._ShowDeleteBtn();
+        console.log(this.$SelectedItems);
+    }
+    _ShowDeleteBtn = () => {
+        if (this.$SelectedItems.length ==0){
+            DeleteBtn.style.display = "none";
+
+            DeleteBtn.removeEventListener('click' , this._DelteItems);
+        }
+        else{
+            DeleteBtn.style.display = "block";
+            DeleteBtn.addEventListener('click' , this._DelteItems);
+        }
+    }
+
+    _DelteItems(){
+        this.$Activities = this.$Activities.filter ( a => {
+            return !this.$SelectedItems.some(m => m == a.id);
+        })
+        this.$SelectedItems = [];
     }
 
     __getSortedActivities() {

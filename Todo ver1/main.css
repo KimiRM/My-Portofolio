@@ -100,7 +100,7 @@ body {
     margin-top: 30px;
 }
 
- #AddSection-AddBtn ,#AddSection-CloseBtn{
+ #AddSection-AddBtn ,#AddSection-CloseBtn , #AddTodo{
     color: #7476ff;
     background-color: transparent;
     font-size: 23px;
@@ -109,7 +109,7 @@ body {
     border: 2px solid #7476ff;
     box-shadow: none;
  }
-#AddSection-AddBtn:hover , #AddSection-CloseBtn:hover{
+#AddSection-AddBtn:hover , #AddSection-CloseBtn:hover , #AddTodo:hover{
     color: #f2f2f2;
     background-color: #7476ff;
     transition-duration: 300ms;
@@ -127,4 +127,8 @@ input , textarea{
     background-color: transparent;
     border-bottom: 1px solid #9FA1FF;
 
+}
+
+#DeleteTodo{
+    display: none;
 }
