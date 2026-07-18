@@ -1,4 +1,4 @@
-class Calender{
+class Calendar{
     constructor(app){
         this.app = app
         this.currentDate = moment();
@@ -6,6 +6,24 @@ class Calender{
     }
     render(){
         this.CalendarContainer.innerHTML = "";
+        
+        // Create calendar wrapper
+        const calendarWrapper = document.createElement('div');
+        calendarWrapper.className = 'calendar-wrapper';
+        
+        // Create header with navigation
+        const header = this._createHeader();
+        calendarWrapper.appendChild(header);
+        
+        // Create grid
+        const grid = this._createGrid();
+        calendarWrapper.appendChild(grid);
+        
+        // Add legend
+        const legend = this._createLegend();
+        calendarWrapper.appendChild(legend);
+        
+        this.CalendarContainer.appendChild(calendarWrapper);
     }
 
     _createHeader(){

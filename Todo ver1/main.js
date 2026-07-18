@@ -49,11 +49,17 @@ class TodoAPP{
     constructor(){
         this.$Activities = [];
         this.$LastID = 0;
-
         this.$SelectedItems = [];
+        this.$filteredDate = null;
 
-       this.styler = new Styler();
-       DeleteBtn.addEventListener('click' , this._DelteItems);
+        this.styler = new Styler();
+        DeleteBtn.addEventListener('click' , this._DelteItems);
+
+        setTimeout(() => {
+            this.calendar = new Calendar(this);
+            this.calendar.render();
+            this.addClearFilterButton();
+        }, 0);
     }
 
     //  ==================     Add Task/Event     ==================
@@ -185,6 +191,11 @@ class TodoAPP{
         this._ShowActivities();
     }
 
+    filterActivitiesByDate(date) {
+        this.$filteredDate = date;
+        this._ShowActivities();
+    }
+
     _ShowActivities = ()=>{
         TaskEventTable_table.innerHTML = "";
 
@@ -193,6 +204,16 @@ class TodoAPP{
         const tbody = document.createElement('tbody');
 
         const activities = this.__getSortedActivities();
+
+        if (this.$filteredDate) {
+            activities = activities.filter(a => {
+                if (a.type === 'Task') {
+                    return moment(a.Start).isSame(this.$filteredDate, 'day');
+                } else {
+                    return moment(a.date).isSame(this.$filteredDate, 'day');
+                }
+            });
+        }
 
         for (let a of activities){
             let aTostr = this.__ActivityToString(a);
@@ -244,6 +265,22 @@ class TodoAPP{
         });
 
         obj.appendChild(cb);
+    }
+
+    addClearFilterButton() {
+        const clearBtn = document.createElement('button');
+        clearBtn.textContent = 'Show All';
+        clearBtn.className = 'clear-filter-btn';
+        clearBtn.addEventListener('click', () => {
+            this.calendar.clearFilter();
+            this.$filteredDate = null;
+            this._ShowActivities();
+        });
+        
+        const leftMenu = document.getElementById('LeftMenu');
+        const oldBtn = leftMenu.querySelector('.clear-filter-btn');
+        if (oldBtn) oldBtn.remove();
+        leftMenu.appendChild(clearBtn);
     }
 
     _UpdateSelectedItems = (id) => {
