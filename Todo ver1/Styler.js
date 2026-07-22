@@ -41,4 +41,16 @@ class Styler{
     styleTr = (tr) =>{
         tr.style.cursor = "pointer";
     }
+
+    _setBorder = (div,border_width="1px",color="#ddd",type="solid") => {
+        div.style.border = `${border_width} ${type} ${color}`; 
+    }
+
+    _setBorderRaidus(div,border_raidus = "5px"){
+        div.style.borderRaidus = `${border_raidus}`;
+    }
+
+    _setBg = (div,color="#ddd") => {
+        div.style.backgroundColor = color;
+    }
 }

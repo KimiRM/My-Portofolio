@@ -3,9 +3,16 @@ class Calendar{
         this.app = app
         this.currentDate = moment();
         this.CalendarContainer = document.getElementById('LeftMenu');
+        this.styler = new Styler();
     }
     render(){
         this.CalendarContainer.innerHTML = "";
+
+        if (this.selectedDate) {
+        const preview = this._createDayPreview(this.selectedDate);
+        this.CalendarContainer.appendChild(preview);
+        return; // Exit early, don't render calendar
+    }
         
         // Create calendar wrapper
         const calendarWrapper = document.createElement('div');
@@ -89,6 +96,7 @@ class Calendar{
         // Days of month
         for (let day = 1; day <= daysInMonth; day++) {
             const dayCell = document.createElement('div');
+            this.styler._setBorder(dayCell);
             dayCell.className = 'calendar-day';
             dayCell.textContent = day;
             
@@ -102,6 +110,8 @@ class Calendar{
             // Check if has activities
             if (this._hasActivities(dateObj)) {
                 dayCell.classList.add('has-activities');
+                this.styler._setBg(dayCell,"red");
+                dayCell.style.color = "white";
             }
             
             // Check if selected
@@ -142,6 +152,35 @@ class Calendar{
         legend.appendChild(selectedItem);
         
         return legend;
+    }
+
+    _createDayPreview(dateObj){
+        const dayPrevWrapper = document.createElement('div');
+        dayPrevWrapper.className = 'dayPrev-wrapper';
+
+        const header = document.createElement('div');
+        header.className = 'dayPrev-header';
+        header.innerHTML = `<span>${dateObj.format('dddd, MMMM DD, YYYY')}</span>`;
+        dayPrevWrapper.appendChild(header);
+
+
+        const backBtn = document.createElement('button');
+        backBtn.textContent = '◀';
+        backBtn.className = 'calendar-nav-btn';
+        backBtn.addEventListener('click', () => {
+            dayPrevWrapper.style.display = "none";
+            this.clearFilter();
+            this.render();
+        });
+        dayPrevWrapper.appendChild(backBtn);
+
+        const info = document.createElement('p');
+        info.textContent = `Selected date: ${dateObj.format('MM/DD/YYYY')}`;
+        info.style.padding = '10px';
+        info.style.margin = '5px 0';
+        dayPrevWrapper.appendChild(info);
+        
+        return dayPrevWrapper;
     }
 
     _hasActivities(date) {

@@ -63,6 +63,14 @@ class TodoAPP{
     }
 
     //  ==================     Add Task/Event     ==================
+    // In main.js, add this method to the TodoAPP class:
+
+    updateCalendar() {
+        if (this.calendar) {
+            this.calendar.render();
+        }
+    }
+
     AddToDo = () =>{
         Overlay.style.display = "block";
         AddSection.style.display = "block";
@@ -176,6 +184,7 @@ class TodoAPP{
         };
         this.$Activities.push(newTask);
         this._ShowActivities();
+        this.updateCalendar();
     }
 
     _CreatEvent(title="Undefined",desc="",date=moment().format("YYYYMMDD"),dur=0){
@@ -189,6 +198,7 @@ class TodoAPP{
         };
         this.$Activities.push(newEvent);
         this._ShowActivities();
+        this.updateCalendar();
     }
 
     filterActivitiesByDate(date) {
@@ -203,7 +213,7 @@ class TodoAPP{
         this._CreateTableHeader(table, ["","Title" , "Date" ,"Description"])
         const tbody = document.createElement('tbody');
 
-        const activities = this.__getSortedActivities();
+        let activities = this.__getSortedActivities();
 
         if (this.$filteredDate) {
             activities = activities.filter(a => {
@@ -313,6 +323,8 @@ class TodoAPP{
             this.$SelectedItems = [];
             this._ShowDeleteBtn();
             this._ShowActivities();
+            this.updateCalendar();
+
         }
     }
 
@@ -406,6 +418,9 @@ class TodoAPP{
         } catch(err) {
             console.log(err.message);
         }
+        finally{
+            this.updateCalendar();
+        }
     }
     _UpdateEvent = (id) => {
         try {
@@ -426,6 +441,9 @@ class TodoAPP{
             
         } catch(err) {
             console.log(err.message);
+        }
+        finally{
+            this.updateCalendar();
         }
     }
 }
