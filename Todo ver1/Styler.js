@@ -6,6 +6,7 @@ class Styler{
 
     styleTable = (table) => {
         table.style.borderCollapse = "collapse";
+        table.style.width = "100%";
 
         const all_headers = table.querySelectorAll('th');
         for (let th of all_headers) {
@@ -31,11 +32,13 @@ class Styler{
         th.style.color= text_color;
         th.style.border= `${border_width} ${type} ${border_color}`;
         th.style.padding= "12px 16px";
+        th.style.textAlign = "left";
     }
 
     styleTd = (td ,border_width = "1px" ,type = "solid" ,color="#ddd" ,padding="12px 16px") => {
         td.style.border= `${border_width} ${type} ${color}`;
         td.style.padding= padding;
+        th.style.textAlign = "left";
     }
 
     styleTr = (tr) =>{
@@ -47,7 +50,7 @@ class Styler{
     }
 
     _setBorderRaidus(div,border_raidus = "5px"){
-        div.style.borderRaidus = `${border_raidus}`;
+        div.style.borderRadius = `${border_raidus}`;
     }
 
     _setBg = (div,color="#ddd") => {
