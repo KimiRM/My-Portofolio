@@ -1,3 +1,9 @@
+// =================   Go to Button    ===================
+
+const GotoBtn = document.getElementById('GotoBtn');
+
+// =================   Table Section    ===================
+
 const AddBtn = document.getElementById('AddTodo');
 const DeleteBtn = document.getElementById('DeleteTodo');
 const EditBtn = document.getElementById('EditTodo');
@@ -60,6 +66,8 @@ class TodoAPP{
             this.calendar.render();
             this.addClearFilterButton();
         }, 0);
+
+        this.GotoTable();
     }
 
     //  ==================     Add Task/Event     ==================
@@ -219,6 +227,8 @@ class TodoAPP{
 
     _ShowActivities = ()=>{
         TaskEventTable_table.innerHTML = "";
+        const table_wrapper = document.createElement('div');
+        this.styler._setPadding(table_wrapper,"10px");
 
         const table = document.createElement('table');
         this._CreateTableHeader(table, ["","Title" , "Date" ,"Description"])
@@ -247,7 +257,8 @@ class TodoAPP{
 
         table.appendChild(tbody);
         this.styler.styleTable(table);
-        TaskEventTable_table.appendChild(table);
+        table_wrapper.appendChild(table)
+        TaskEventTable_table.appendChild(table_wrapper);
     }
 
     _CreateTableHeader(obj,colNames){
@@ -457,6 +468,12 @@ class TodoAPP{
             this.updateCalendar();
         }
     }
+
+    GotoTable = ()=>{
+        GotoBtn.addEventListener('click',function(){
+            TodoTable.scrollIntoView({behavior: "smooth",block: 'start'})
+        });
+    }
 }
 
 function Setup(){
@@ -468,5 +485,6 @@ function Setup(){
         }
     });
     app._ShowActivities();
+    
 
 }

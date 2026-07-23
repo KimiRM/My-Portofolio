@@ -78,4 +78,8 @@ class Styler{
         obj.style.flexDirection = direction;
         obj.style.gap=gap;
     }
+
+    _setPadding(obj,padding="10px"){
+        obj.style.padding=padding;
+    }
 }
