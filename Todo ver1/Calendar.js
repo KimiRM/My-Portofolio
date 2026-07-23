@@ -36,13 +36,12 @@ class Calendar{
     _createHeader(){
         const header = document.createElement('div');
         header.className = "Calendar-header";
+        this.styler._setWidth(header);
+        this.styler._setDisplayFlex(header,"row","center","center","45px");
 
         const monthYear = document.createElement('span');
         monthYear.className = 'calendar-month-year';
         monthYear.textContent = this.currentDate.format('MMMM YYYY');
-        
-        const navButtons = document.createElement('div');
-        navButtons.className = 'calendar-nav-buttons';
         
         const prevBtn = document.createElement('button');
         prevBtn.textContent = '◀';
@@ -58,12 +57,13 @@ class Calendar{
             this.currentDate.add(1, 'month');
             this.render();
         });
+        this.styler._setBg(prevBtn,"#F6BD60");
+        this.styler._setBg(nextBtn,"#F6BD60");
         
-        navButtons.appendChild(prevBtn);
-        navButtons.appendChild(nextBtn);
+        header.appendChild(prevBtn);
         
         header.appendChild(monthYear);
-        header.appendChild(navButtons);
+        header.appendChild(nextBtn);
         
         return header;
     }
@@ -105,12 +105,13 @@ class Calendar{
             // Check if today
             if (dateObj.isSame(today, 'day')) {
                 dayCell.classList.add('today');
+                this.styler._setBg(dayCell,"#84A59D");
             }
             
             // Check if has activities
             if (this._hasActivities(dateObj)) {
                 dayCell.classList.add('has-activities');
-                this.styler._setBg(dayCell,"red");
+                this.styler._setBg(dayCell,"#F28482");
                 dayCell.style.color = "white";
             }
             

@@ -27,7 +27,7 @@ class Styler{
         }
     }
 
-    styleTh = (th ,border_width = "1px" ,type = "solid" ,border_color="#ddd" ,padding="12px 16px",background_color="#7476ff",text_color = "#f2f2f2") => {
+    styleTh = (th ,border_width = "1px" ,type = "solid" ,border_color="#84A59D" ,padding="12px 16px",background_color="#F6BD60",text_color = "#ffffff") => {
         th.style.backgroundColor= background_color;
         th.style.color= text_color;
         th.style.border= `${border_width} ${type} ${border_color}`;
@@ -55,5 +55,27 @@ class Styler{
 
     _setBg = (div,color="#ddd") => {
         div.style.backgroundColor = color;
+    }
+
+    _setHover(obj,bg_before="transparent",bg_after="transparent",color_before="black",color_after="black",transition_duration="300ms",transition_mode="ease"){
+        obj.style.transition = `${transition_duration} ${transition_mode}`;
+        obj.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = bg_after;
+            this.style.color = color_after;
+        });
+
+        obj.addEventListener('mouseleave', function() {
+            this.style.backgroundColor = bg_before;
+            this.style.color = color_before;
+        });
+    }
+
+    _setWidth = (obj , width="100%") => {
+        obj.style.width=width;
+    }
+    _setDisplayFlex = (obj , direction="column",justify_content="center",align_items="center",gap="10px") => {
+        obj.style.display = "flex";
+        obj.style.flexDirection = direction;
+        obj.style.gap=gap;
     }
 }

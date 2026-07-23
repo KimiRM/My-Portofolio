@@ -76,6 +76,8 @@ class TodoAPP{
         AddSection.style.display = "block";
 
         AddSectionTaskDiv.style.display = "block";
+        this.styler._setBg(AddSectionTaskBtn,"#ffffff");
+
         AddSectionEventDiv.style.display = "none";
         AddSectionFooter.style.display = "block";
 
@@ -101,6 +103,10 @@ class TodoAPP{
         AddSectionTaskDiv.style.display = "block";
         AddSectionFooter.style.display = "block";
         AddSectionEventDiv.style.display = "none";
+
+        this.styler._setBg(AddSectionTaskBtn,"#ffffff");
+        this.styler._setBg(AddSectionEventBtn,"#F5CAC3");
+
 
         const now = moment().format('YYYY-MM-DDTHH:mm');
         AddSectionTask_StartTime.value = now;
@@ -136,12 +142,17 @@ class TodoAPP{
         AddSectionTaskDiv.style.display = "none";
         AddSectionEventDiv.style.display = "none";
         AddSectionFooter.style.display = "none";
+        this.styler._setBg(AddSectionTaskBtn,"#ffffff");
+        this.styler._setBg(AddSectionEventBtn,"#F5CAC3");
     }
 
     _AddTodo_Event = () =>{
         AddSectionEventDiv.style.display = "block";
         AddSectionFooter.style.display = "block";
         AddSectionTaskDiv.style.display = "none";
+
+        this.styler._setBg(AddSectionEventBtn,"#ffffff");
+        this.styler._setBg(AddSectionTaskBtn,"#F5CAC3");
 
         const now = moment().format('YYYY-MM-DDTHH:mm');
         AddSectionEvent_Date.value = now;

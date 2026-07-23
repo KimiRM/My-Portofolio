@@ -1,6 +1,3 @@
-/* Color Palette : #9FA1FF, #B5BAFF , #AEE2FF , #D9F9DF ,#f2fffd
- ,#8140DC */
-
  /* Color Palette : #F6BD60, #F7EDE2 , #F5CAC3 , #84A59D ,#F28482 */
 
 @import url('https://fonts.googleapis.com/css2?family=Murecho:wght@100..900&display=swap');
@@ -13,7 +10,7 @@
 }
 
 body {
-    background-color: #9FA1FF;
+    background-color: #F7EDE2;
 }
 
 #LandingWelcome{
@@ -34,7 +31,7 @@ body {
     flex-direction: row;
     width: 90%;
     margin: 0 auto;
-    background-color: #f2fffd;
+    background-color: #fffdfb;
     border-radius: 10px;
     gap: 10px;
 }
@@ -46,11 +43,12 @@ body {
 }
 #RightMenu{
     border: none;
-    width: 10%;
+    width: 5%;
     height: 430px;
 }
 #TaskEventTable {
-    border: 1px solid black;
+    border: 1px solid #F6BD60;
+    border-radius: 10px;
     width: 80%;
     height: 430px;
 }
@@ -74,36 +72,57 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: white;
+    background: #F7EDE2; /* Cozy warm base */
     padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(242, 132, 242, 0.15);
     z-index: 1000;
-    max-width: 600px;
+    max-width: 550px;
     width: 90%;
     max-height: 90vh;
-    overflow-y: auto;
-    display: flex;
+    border: 2px solid #F5CAC3;
     flex-direction: column;
 }
+
+#AddSectionHeader {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 0;
+}
+
+
 
 #TodoTable {
     position: relative;
     z-index: 1;
 }
 
-#AddSection-AddEvent , #AddSection-AddTask{
-    background-color: transparent;
-    border: none;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
-    border-bottom: 3px solid #9FA1FF;
-    box-shadow: none;
+#AddSection-AddEvent, #AddSection-AddTask {
+    background-color: rgba(245, 202, 195, 0.4);
+    color: #555;
+    border: 2px solid #F5CAC3;
+    border-bottom: none;
+    padding: 10px 22px;
+    margin: 0;
+    border-radius: 14px 14px 0 0;
+    font-family: "Murecho", sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
 }
-#AddSection-AddEvent:hover , #AddSection-AddTask:hover{
-    background: #9FA1FF;
-    transition: 0.5s ease;
+#AddSection-AddEvent.active, 
+#AddSection-AddTask.active {
+    background-color: #F5CAC3;
+    color: #F284F2;
+    border-color: #F5CAC3;
+    position: relative;
+    z-index: 2;
+    margin-bottom: -2px; 
+}
+
+#AddSection-AddEvent:hover:not(.active), #AddSection-AddTask:hover:not(.active) {
+    background-color: #F5CAC3;
+    color: #333;
 }
 
 #AddSectionFooter{
@@ -115,32 +134,119 @@ body {
 }
 
  #AddSection-AddBtn ,#AddSection-CloseBtn , #AddTodo , #DeleteTodo{
-    color: #7476ff;
+    color: #84A59D;
     background-color: transparent;
-    font-size: 23px;
-    padding: 10px;
+    font-size: 18px;
+    padding: 7px;
     border-radius: 5px;
-    border: 2px solid #7476ff;
+    border: 2px solid #84A59D;
     box-shadow: none;
  }
 #AddSection-AddBtn:hover , #AddSection-CloseBtn:hover , #AddTodo:hover , #DeleteTodo:hover{
     color: #f2f2f2;
-    background-color: #7476ff;
+    background-color: #84A59D;
     transition-duration: 300ms;
 }
-
-#AddSectionTask-Title , #AddSectionEvent-Title , #AddSectionTask-desc , #AddSectionEvent-desc{
+#AddSectionTask-Title, 
+#AddSectionEvent-Title, 
+#AddSectionTask-desc, 
+#AddSectionEvent-desc {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* Align label and input horizontally */
     align-items: center;
-    gap: 20px;
+    gap: 15px;
+    margin-bottom: 16px;
+}
+#AddSectionTask-TitleInput, 
+#AddSectionEvent-TitleInput {
+    flex: 1;
+}
+#AddSectionTask-DescInput, 
+#AddSectionEvent-DescInput {
+    flex: 1;
+    height: 4.2em;
+    max-height: 120px;
+    overflow-y: auto;
+    resize: vertical;
+    padding: 8px;
+    border: 1.5px solid #F5CAC3;
+    border-radius: 10px;
+    background-color: #FFFDFB;
+    font-family: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+#AddSectionBodyLayer {
+    background-color: #ffffff;
+    border: 2px solid #F5CAC3;
+    border-radius: 0 16px 16px 16px;
+    padding: 24px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
 }
 
-input , textarea{
-    border: none;
-    background-color: transparent;
-    border-bottom: 1px solid #9FA1FF;
+#AddSectionTask-DescInput:focus, #AddSectionEvent-DescInput:focus {
+    outline: none;
+    border-color: #F284F2;
+    box-shadow: 0 0 0 3px rgba(242, 132, 242, 0.2);
+}
 
+#AddSectionTask-TitleInput, #AddSectionEvent-TitleInput, 
+#AddSectionTask-StartTime-input, #AddSectionTask-EndTime-input, 
+#AddSectionEvent-Date-input {
+    border: none;
+    border-bottom: 2px solid #F5CAC3;
+    background-color: transparent;
+    padding: 6px 10px;
+    outline: none;
+    transition: border-color 0.25s ease;
+}
+
+#AddSectionTask-TitleInput:focus, #AddSectionEvent-TitleInput:focus, 
+#AddSectionTask-StartTime-input:focus, #AddSectionTask-EndTime-input:focus, 
+#AddSectionEvent-Date-input:focus {
+    border-bottom-color: #F284F2;
+}
+
+#AddSectionFooter {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+#AddSection-AddBtn, #AddSection-CloseBtn {
+    color: #4A4A4A;
+    background-color: #ffffff;
+    font-family: "Murecho", sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 8px 20px;
+    border-radius: 12px;
+    border: 2px solid #F5CAC3;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#AddSection-AddBtn:hover {
+    color: #ffffff;
+    background-color: #F284F2;
+    border-color: #F284F2;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(242, 132, 242, 0.4);
+}
+
+#AddSection-CloseBtn:hover {
+    color: #ffffff;
+    background-color: #F5CAC3;
+    border-color: #F5CAC3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(245, 202, 195, 0.5);
+}
+
+textarea{
+    width: 400px;
 }
 
 #DeleteTodo{
