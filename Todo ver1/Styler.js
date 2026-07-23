@@ -12,6 +12,8 @@ class Styler{
         for (let th of all_headers) {
             this.styleTh(th,);
         }
+        const tbody = table.querySelectorAll('tbody');
+        this.styleTbody(table,tbody);
 
     }
 
@@ -27,18 +29,21 @@ class Styler{
         }
     }
 
-    styleTh = (th ,border_width = "1px" ,type = "solid" ,border_color="#84A59D" ,padding="12px 16px",background_color="#F6BD60",text_color = "#ffffff") => {
+    styleTh = (th ,border_width = "1px" ,type = "solid" ,border_color="#84A59D" ,padding="12px 16px",background_color="#F6BD60",text_color = "#ffffff",font_family="DynaPuff") => {
         th.style.backgroundColor= background_color;
         th.style.color= text_color;
         th.style.border= `${border_width} ${type} ${border_color}`;
         th.style.padding= "12px 16px";
         th.style.textAlign = "left";
+        th.style.fontFamily = font_family;
+        th.style.fontWeight = "500";
     }
 
-    styleTd = (td ,border_width = "1px" ,type = "solid" ,color="#ddd" ,padding="12px 16px") => {
-        td.style.border= `${border_width} ${type} ${color}`;
+    styleTd = (td ,border_width = "1px" ,type = "solid" ,color="#ddd" ,padding="12px 16px",font_family="Quicksand") => {
+        td.style.borderBottom= `${border_width} ${type} ${color}`;
         td.style.padding= padding;
-        th.style.textAlign = "left";
+        td.style.textAlign = "left";
+        td.style.fontFamily = font_family;
     }
 
     styleTr = (tr) =>{
@@ -81,5 +86,8 @@ class Styler{
 
     _setPadding(obj,padding="10px"){
         obj.style.padding=padding;
+    }
+    _setFontFamily(obj , font_family='quicksand'){
+        obj.style.fontFamily = font_family;
     }
 }

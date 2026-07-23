@@ -188,6 +188,11 @@ body {
     height: 430px;
 }
 #RightMenu{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    padding: 10px;
+    gap: 20px;
     border: none;
     width: 7%;
     height: 430px;
@@ -211,7 +216,7 @@ body {
     z-index: 999;
 }
 
-#AddSection {
+#AddSection{
     display: none;
     position: fixed;
     top: 50%;
@@ -228,6 +233,58 @@ body {
     border: 2px solid #F5CAC3;
     flex-direction: column;
 }
+#SearchSection{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff; /* Cozy warm base */
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(242, 132, 242, 0.15);
+    z-index: 1000;
+    max-width: 550px;
+    width: 90%;
+    max-height: 90vh;
+    border: 2px solid #F5CAC3;
+    flex-direction: row;
+    gap: 30px;
+}
+#SearchInput{
+    background-color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    width: 85%;
+    height: 50px;
+    font-family: 'quicksand';
+}
+#SearchInput::placeholder{
+    font-family: 'DynaPuff';
+    font-weight: 500;
+    color: #a1a1a1;
+}
+#SearchInput:focus{
+    outline: none;
+    border-bottom: 1px solid #F5CAC3;
+}
+#SearchSection button{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    padding: auto;
+    color: #84A59D;
+    background-color: transparent;
+    border: 2px solid #84A59D;
+    box-shadow: none;
+}
+
+#SearchSection button:hover{
+    color: #f2f2f2;
+    background-color: #84A59D;
+    transition-duration: 300ms;
+}
+
 
 #AddSectionHeader {
     display: flex;
@@ -289,7 +346,7 @@ body {
     box-shadow: none;
 }
 
- #AddSection-AddBtn ,#AddSection-CloseBtn , #DeleteTodo{
+ #AddSection-AddBtn ,#AddSection-CloseBtn{
     color: #84A59D;
     background-color: transparent;
     font-size: 18px;
@@ -298,7 +355,7 @@ body {
     border: 2px solid #84A59D;
     box-shadow: none;
  }
-#AddSection-AddBtn:hover , #AddSection-CloseBtn:hover , #AddTodo:hover , #DeleteTodo:hover{
+#AddSection-AddBtn:hover , #AddSection-CloseBtn:hover , #AddTodo:hover{
     color: #f2f2f2;
     background-color: #84A59D;
     transition-duration: 300ms;
@@ -405,8 +462,21 @@ textarea{
     width: 400px;
 }
 
-#DeleteTodo{
-    display: none;
+#DeleteTodo , #SearchTodo , #FilterTodo{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    padding: auto;
+    color: #84A59D;
+    background-color: transparent;
+    border: 2px solid #84A59D;
+    box-shadow: none;
+}
+
+#DeleteTodo:hover , #SearchTodo:hover , #FilterTodo:hover{
+    color: #f2f2f2;
+    background-color: #84A59D;
+    transition-duration: 300ms;
 }
 
 /* Calendar Layout */

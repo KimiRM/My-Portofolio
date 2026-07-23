@@ -42,6 +42,8 @@ class Calendar{
         const monthYear = document.createElement('span');
         monthYear.className = 'calendar-month-year';
         monthYear.textContent = this.currentDate.format('MMMM YYYY');
+        monthYear.style.fontFamily = "DynaPuff";
+        monthYear.style.fontSize="17px";
         
         const prevBtn = document.createElement('button');
         prevBtn.className = 'fas fa-chevron-left';
@@ -76,7 +78,7 @@ class Calendar{
         
         header.appendChild(monthYear);
         header.appendChild(nextBtn);
-        
+        header.style.alignItems="center";
         return header;
     }
 
@@ -90,6 +92,7 @@ class Calendar{
             const dayName = document.createElement('div');
             dayName.className = 'calendar-day-name';
             dayName.textContent = day;
+            dayName.style.fontFamily='quicksand';
             grid.appendChild(dayName);
         });
         
@@ -111,6 +114,7 @@ class Calendar{
             this.styler._setBorder(dayCell);
             dayCell.className = 'calendar-day';
             dayCell.textContent = day;
+            dayCell.style.fontFamily='quicksand';
             
             const dateObj = this.currentDate.clone().date(day);
             

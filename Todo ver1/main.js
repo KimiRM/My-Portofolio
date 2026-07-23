@@ -7,6 +7,9 @@ const GotoBtn = document.getElementById('GotoBtn');
 const AddBtn = document.getElementById('AddTodo');
 const DeleteBtn = document.getElementById('DeleteTodo');
 const EditBtn = document.getElementById('EditTodo');
+const SearchBtn = document.getElementById('SearchTodo');
+const FilterBtn = document.getElementById('FilterTodo');
+
 
 // =================   Table Section    ===================
 
@@ -20,6 +23,7 @@ const TableLeftMenu = document.getElementById('LeftMenu');
 const Overlay = document.getElementById('Overlay');
 
 // =================   Add Section    ===================
+
 const AddSection = document.getElementById('AddSection');
 AddSection.style.display = "none";
 const AddSectionTaskDiv = document.getElementById('AddSectionTask');
@@ -45,9 +49,11 @@ const AddSectionAddBtn = document.getElementById('AddSection-AddBtn');
 const AddSectionCloseBtn = document.getElementById('AddSection-CloseBtn');
 
 
+// =================   Search Section    ===================
 
-
-
+const SearchSection = document.getElementById('SearchSection');
+const SearchInput = document.getElementById('SearchInput');
+const SearchSectionBtn = document.getElementById('SearchBtn');
 
 // ======================    Todo Main Class    ======================
 
@@ -57,15 +63,20 @@ class TodoAPP{
         this.$LastID = 0;
         this.$SelectedItems = [];
         this.$filteredDate = null;
+        this.$itemsOnBoard = null;
 
         this.styler = new Styler();
         DeleteBtn.addEventListener('click' , this._DelteItems);
+        SearchBtn.addEventListener('click',this.SearchSectionShow);
+        SearchSectionBtn.addEventListener('click',this.SearchTodos);
 
         setTimeout(() => {
             this.calendar = new Calendar(this);
             this.calendar.render();
             this.addClearFilterButton();
         }, 0);
+
+
 
         this.GotoTable();
     }
@@ -234,10 +245,11 @@ class TodoAPP{
         this._CreateTableHeader(table, ["","Title" , "Date" ,"Description"])
         const tbody = document.createElement('tbody');
 
-        let activities = this.__getSortedActivities();
+        this.$itemsOnBoard=this.$Activities;
+        let activities = this.__getSortedActivities(this.$Activities);
 
         if (this.$filteredDate) {
-            activities = activities.filter(a => {
+            this.$itemsOnBoard = activities.filter(a => {
                 if (a.type === 'Task') {
                     return moment(a.Start).isSame(this.$filteredDate, 'day');
                 } else {
@@ -323,35 +335,30 @@ class TodoAPP{
             this.$SelectedItems.push(id);
         }
 
-        this._ShowDeleteBtn();
+        this._DisableDeleteBtn();
     }
-    _ShowDeleteBtn = () => {
-        if (this.$SelectedItems.length ==0){
-            DeleteBtn.style.display = "none";
-
-            DeleteBtn.removeEventListener('click' , this._DelteItems);
-        }
-        else{
-            DeleteBtn.style.display = "block";
-            DeleteBtn.addEventListener('click' , this._DelteItems);
-        }
+    _DisableDeleteBtn = () => {
+        DeleteBtn.disabled = this.$SelectedItems.length === 0;
     }
 
     _DelteItems = () => {
+        if (this.$SelectedItems.length === 0) {
+            return;  // Just exit early, nothing to delete
+        }
         if(window.confirm("Are you sure you want to delete items?")){
             this.$Activities = this.$Activities.filter ( a => {
                 return !this.$SelectedItems.some(m => m == a.id);
             })
             this.$SelectedItems = [];
-            this._ShowDeleteBtn();
+            this._DisableDeleteBtn();
             this._ShowActivities();
             this.updateCalendar();
 
         }
     }
 
-    __getSortedActivities() {
-        return [...this.$Activities].sort((a, b) => {
+    __getSortedActivities(list) {
+        return [...list].sort((a, b) => {
             let timeA = a.type === 'Task' ? a.Start : a.date;
             let timeB = b.type === 'Task' ? b.Start : b.date;
             return new Date(timeA) - new Date(timeB);
@@ -361,12 +368,19 @@ class TodoAPP{
         if(a.type == "Task"){
             const start = moment(a.Start).format('MMM DD, HH:mm');
             const end = moment(a.End).format('MMM DD, HH:mm');
-            return [a.title , `Start: ${start}    End: ${end}` ,a.descript];
+            return [a.title , `${start} to ${end}` ,this._cutDescription(a.descript)];
         }
         else{
             const date = moment(a.date).format('MMM DD, HH:mm');
-            return [a.title , `${date}` ,a.descript];
+            return [a.title , `${date}` ,this._cutDescription(a.descript)];
         }
+    }
+
+    _cutDescription(desc){
+        if(desc.length > 20){
+            return `${desc.slice(0,19)} ...`
+        }
+        else return desc
     }
 
     _EditActivity = (row, activity) => {
@@ -474,14 +488,38 @@ class TodoAPP{
             TodoTable.scrollIntoView({behavior: "smooth",block: 'start'})
         });
     }
+
+    SearchSectionShow = () => {
+        Overlay.style.display="block";
+        SearchSection.style.display = "block";
+    }
+    SearchTodos=()=>{
+        let str = SearchInput.value;
+        this._search(str);
+        this._ShowActivities();
+        this._CloseSearch();
+    }
+
+    _search = (str) => {
+        this.$itemsOnBoard = this.$itemsOnBoard.filter(a => {
+            a.title.find(str) || a.descript.find(str)
+        });
+    }
+
+    _CloseSearch(){
+        SearchInput.value="";
+        SearchSection.style.display='none';
+        Overlay.style.display='none';
+    }
 }
 
 function Setup(){
     const app = new TodoAPP;
     AddBtn.addEventListener('click',app.AddToDo);
     Overlay.addEventListener('click', function(e) {
-        if (e.target === this) { // Only close if clicking the overlay itself
+        if (e.target === this) { 
             app._CloseAddSection();
+            app._CloseSearch();
         }
     });
     app._ShowActivities();
