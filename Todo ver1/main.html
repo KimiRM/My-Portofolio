@@ -6,19 +6,36 @@
     <title>Todo</title>
     <link rel="stylesheet" href="main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Murecho:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
+
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
   </head>
   <body onload="Setup()">
     <div id="LandingWelcome">
-      <h1 id="LandingHeader">
-        Your <span id="LandingHeaderStrikeOut">TODO</span> List
-      </h1>
-      <h4 id="LandingSubHeader">Manage your tasks and events</h4>
+
+      <div id="header">
+        <div id="header-wrapper">
+          <h1 id="LandingHeader">
+            Your <s style="color: #F28482;">TODO</s> List
+          </h1>
+          <h4 id="LandingSubHeader">Organize. Plan. Achieve.</h4>
+        </div>
+        <img id="LandingPic" src="LandingPic.png" alt="">
+      </div>
+
+      <div id="LandingDescription">
+        <p >
+          Stay organized with our beautifully crafted todo app. 
+          Plan your day, schedule events, and track your progress 
+          all in one cozy, intuitive space designed to make 
+            productivity feel effortless.
+        </p>
+      </div>
     </div>
 
     <div id="TodoTable">
@@ -29,8 +46,13 @@
       </div>
       <!-- right menu contains add , delete , edit -->
       <div id="RightMenu">
-        <button id="AddTodo">Add</button>
-        <button id="DeleteTodo">Delete</button>
+        <div id="Helperbuttons">
+          <button id="AddTodo" title="Add New Task/Event"><i class="fi fi-br-plus"></i></button>
+          <button id="DeleteTodo"><i class="fi fi-rr-trash"></i></button>
+        </div>
+        <div id="statistics">
+
+        </div>
       </div>
     </div>
 
@@ -101,6 +123,26 @@
         <button id="AddSection-AddBtn">Add</button>
         <button id="AddSection-CloseBtn">Close</button>
       </div>
+    </div>
+
+    <div id="footer">
+      <div class="footer-links">
+        <div id="footerContactLinks">
+          <div style="display: flex;flex-direction: row;align-items: center;">
+            <button onclick="window.open('https://t.me/Kimi_r_m', '_blank')" id="telegram" title="Telegram"><i class="fa-brands fa-telegram"></i></button>
+            <h5>@Kimi_r_m</h5>
+          </div>
+          <div style="display: flex;flex-direction: row;align-items: center;">
+            <button onclick="window.open('https://github.com/KimiRM/My-Portofolio', '_blank')" id="github" title="GitHub"><i class="fa-brands fa-github"></i></button>
+            <h5>github.com/KimiRM/My-Portofolio</h5>
+          </div>
+          <div style="display: flex;flex-direction: row;align-items: center;"> 
+            <button id="phone" title="Contact"><i class="fa-solid fa-phone"></i></button>
+            <h5>+98 912 799 0224</h5>
+          </div>
+        </div>
+      </div>
+      <h5>Created By <span style="color: #F28482;">❤</span></h5>
     </div>
 
     <script src="main.js"></script>

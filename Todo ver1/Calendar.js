@@ -44,15 +44,13 @@ class Calendar{
         monthYear.textContent = this.currentDate.format('MMMM YYYY');
         
         const prevBtn = document.createElement('button');
-        prevBtn.textContent = '◀';
-        prevBtn.className = 'calendar-nav-btn';
+        prevBtn.className = 'fas fa-chevron-left';
         prevBtn.addEventListener('click', () => {
             this.currentDate.subtract(1, 'month');
             this.render();
         });
         const nextBtn = document.createElement('button');
-        nextBtn.textContent = '▶';
-        nextBtn.className = 'calendar-nav-btn';
+        nextBtn.className = 'fas fa-chevron-right';
         nextBtn.addEventListener('click', () => {
             this.currentDate.add(1, 'month');
             this.render();
@@ -60,6 +58,20 @@ class Calendar{
         this.styler._setBg(prevBtn,"#F6BD60");
         this.styler._setBg(nextBtn,"#F6BD60");
         
+        this.styler._setBorder(nextBtn,"0px","black","solid");
+        this.styler._setBorder(prevBtn,"0px","black","solid");
+        this.styler._setBorderRaidus(nextBtn,"5px");
+        this.styler._setBorderRaidus(prevBtn,"5px");
+
+        nextBtn.style.padding = "10px";
+        nextBtn.style.width="40px";
+        nextBtn.style.height="40px";
+        prevBtn.style.padding = "10px";
+        prevBtn.style.width="40px";
+        prevBtn.style.height="40px";
+
+        
+
         header.appendChild(prevBtn);
         
         header.appendChild(monthYear);
