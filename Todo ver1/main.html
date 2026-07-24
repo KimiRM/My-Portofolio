@@ -150,6 +150,15 @@
               <input type="datetime-local" id="AddSectionTask-EndTime-input" />
             </div>
           </div>
+          <div id="AddSectionTask-Priority">
+            <label>Priority: </label>
+            <select id="TaskPriority">
+              <option value="LOW">Low</option>
+              <option value="MEDIUM">Medium</option>
+              <option value="HIGH">High</option>
+              <option value="URGENT">Urgent</option>
+            </select>
+          </div>
         </div>
 
         <div id="AddSectionEvent">
@@ -176,10 +185,17 @@
             </div>
             <div id="AddSectionEvent-Duration">
               <label>Duration : </label>
-              <div id="AddSectionEvent-Duration-options">
-                
-              </div>
+              <div id="AddSectionEvent-Duration-options"></div>
             </div>
+          </div>
+          <div id="AddSectionEvent-Priority">
+            <label>Priority: </label>
+            <select id="EventPriority">
+              <option value="LOW">Low</option>
+              <option value="MEDIUM">Medium</option>
+              <option value="HIGH">High</option>
+              <option value="URGENT">Urgent</option>
+            </select>
           </div>
         </div>
       </div>

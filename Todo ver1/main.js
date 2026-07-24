@@ -58,6 +58,23 @@ const SearchSection = document.getElementById('SearchSection');
 const SearchInput = document.getElementById('SearchInput');
 const SearchSectionBtn = document.getElementById('SearchBtn');
 
+// =================   Priorities    ===================
+
+const LOW = 1;
+const MEDIUM = 2;
+const HIGH = 3;
+const URGENT = 4;
+
+
+
+
+
+
+
+
+
+
+
 // ======================    Todo Main Class    ======================
 
 class TodoAPP{
@@ -175,8 +192,9 @@ class TodoAPP{
             const d = AddSectionTask_Desc.value;
             const st = AddSectionTask_StartTime.value;
             const et = AddSectionTask_EndTime.value;
+            const p = this._GetPriorityTask();
 
-            this._CreatTask(t,d,st,et);
+            this._CreatTask(t,d,st,et,p);
             this._CloseAddSection();
 
         }catch(err){
@@ -220,9 +238,10 @@ class TodoAPP{
             const d = AddSectionEvent_Desc.value;
             const date = AddSectionEvent_Date.value;
             const dur = this._GetDuration();
+            const p = this._GetPriorityEvent();
 
 
-            this._CreatEvent(t,d,date,dur);
+            this._CreatEvent(t,d,date,dur,p);
             this._CloseAddSection();
 
 
@@ -245,33 +264,78 @@ class TodoAPP{
 
         return (hours * 60) + minutes;
     }
+
+    _GetPriorityTask=()=>{
+        const taskSelect = document.getElementById('TaskPriority');
+        
+        if (!taskSelect) {
+            console.error('Priority not found');
+            return 0;
+        }
+        switch(taskSelect.value){
+            case "LOW": 
+                return LOW;
+            case "MEDIUM":
+                return MEDIUM;
+            case "HIGH":
+                return HIGH;
+            case "URGENT":
+                return URGENT;
+            default:
+                return LOW;
+        }
+
+    }
+    _GetPriorityEvent=()=>{
+        const eventSelect = document.getElementById('EventPriority');
+        
+        if (!eventSelect) {
+            console.error('Priority not found');
+            return 0;
+        }
+        switch(taskSelect.value){
+            case "LOW": 
+                return LOW;
+            case "MEDIUM":
+                return MEDIUM;
+            case "HIGH":
+                return HIGH;
+            case "URGENT":
+                return URGENT;
+            default:
+                return LOW;
+        }
+
+    }
     _AssignID(){
         this.$LastID++;
         return this.$LastID;
     }
 
-    _CreatTask(title="Undefined",desc="",start=moment().format("YYYYMMDD"),end=moment().format("YYYYMMDD")){
+    _CreatTask(title="Undefined",desc="",start=moment().format("YYYYMMDD"),end=moment().format("YYYYMMDD"),priority=LOW){
         const newTask = {
             id: this._AssignID(),
             type: "Task",
             title: title,
             descript: desc,
             Start: start,
-            End: end
+            End: end,
+            priority: priority
         };
         this.$Activities.push(newTask);
         this._ShowActivities();
         this.updateCalendar();
     }
 
-    _CreatEvent(title="Undefined",desc="",date=moment().format("YYYYMMDD"),dur=0){
+    _CreatEvent(title="Undefined",desc="",date=moment().format("YYYYMMDD"),dur=0,priority=LOW){
         const newEvent = {
             id: this._AssignID(),
             type: "Event",
             title: title,
             descript: desc,
             date: date,
-            duration: dur
+            duration: dur,
+            priority: priority
         };
         this.$Activities.push(newEvent);
         this._ShowActivities();
@@ -289,7 +353,7 @@ class TodoAPP{
         this.styler._setPadding(table_wrapper,"10px");
 
         const table = document.createElement('table');
-        this._CreateTableHeader(table, ["","Title" , "Date" ,"Description"])
+        this._CreateTableHeader(table, ["","Title" , "Date" ,"Description",'Priority']);
         const tbody = document.createElement('tbody');
 
         this.$itemsOnBoard = this.__getSortedActivities(this.$Activities);
@@ -354,6 +418,7 @@ class TodoAPP{
             col.textContent = s;
             tr.appendChild(col);
         }
+        this._showPriority(tr,id);
         obj.appendChild(tr);
         return tr;
     }
@@ -368,6 +433,43 @@ class TodoAPP{
         });
 
         obj.appendChild(cb);
+    }
+
+    _showPriority(tr,id){
+        let item = this.$Activities.find(a => a.id == id);
+
+        if (!item) {
+            console.warn(`Activity with id ${id} not found`);
+            return;
+        }
+
+        const priorityWrapper = document.createElement('div');
+        const text = document.createElement('span');
+        switch (item.priority){
+            case LOW:
+                text.textContent = "Low";
+                this.styler._setColor(text,'#ffffff');
+                break;
+            case MEDIUM:
+                this.styler._setColor(text,'#ffffff');
+                text.textContent = "Medium";
+                break;
+            case HIGH:
+                text.textContent = "High";
+                this.styler._setColor(text,'#ffffff');
+                break;
+            case URGENT:
+                text.textContent = "Urgent";
+                this.styler._setColor(text,'#ffffff');
+                break;
+            default:
+                text.textContent = "Low";
+                break;
+        }
+        this.styler._setFontFamily(text);
+        this.styler._stylePriorityDiv(priorityWrapper,item.priority);
+        priorityWrapper.appendChild(text);
+        tr.appendChild(priorityWrapper);
     }
 
     addClearFilterButton() {

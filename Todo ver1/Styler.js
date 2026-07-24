@@ -39,15 +39,16 @@ class Styler{
         th.style.fontWeight = "500";
     }
 
-    styleTd = (td ,border_width = "1px" ,type = "solid" ,color="#ddd" ,padding="12px 16px",font_family="Quicksand") => {
-        td.style.borderBottom= `${border_width} ${type} ${color}`;
+    styleTd = (td ,padding="12px 16px",font_family="Quicksand") => {
         td.style.padding= padding;
         td.style.textAlign = "left";
         td.style.fontFamily = font_family;
+        td.style.verticalAlign = "middle";
     }
 
-    styleTr = (tr) =>{
+    styleTr = (tr,border_width = "1px" ,type = "solid" ,color="#ddd" ) =>{
         tr.style.cursor = "pointer";
+        tr.style.borderBottom= `${border_width} ${type} ${color}`;
     }
 
     _setBorder = (div,border_width="1px",color="#ddd",type="solid") => {
@@ -118,5 +119,37 @@ class Styler{
         this._setBg(btn,"transparent");
         this._setPadding(btn,"auto");
         btn.style.boxShadow = "none";
+    }
+
+    _stylePriorityDiv = (div,type) =>{
+        this._setBorder(div,"0px","","");
+        this._setBorderRaidus(div,"5px");
+        div.style.display= "inline-flex";
+        div.style.flexDirection = "row";
+        div.style.gap= "5px";
+        div.style.padding = "4px 12px"; 
+        div.style.alignItems = "center";
+        div.style.justifyContent = "center";
+
+        switch(type){
+            case LOW:
+                this._setBg(div,"#b8c9ad");
+                break;
+            case MEDIUM:    
+                this._setBg(div,"#E8C37D");
+                break;
+            case HIGH:
+                this._setBg(div,"#E07A5F");
+                break;
+            case URGENT:
+                this._setBg(div," #C44E52");
+                break;
+            default:
+                this._setBg(div,"#b8c9ad");
+                break;
+        }
+    }
+    _setColor(obj,color){
+        obj.style.color = color;
     }
 }
