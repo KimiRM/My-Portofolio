@@ -293,7 +293,7 @@ class TodoAPP{
             console.error('Priority not found');
             return 0;
         }
-        switch(taskSelect.value){
+        switch(eventSelect.value){
             case "LOW": 
                 return LOW;
             case "MEDIUM":
@@ -349,11 +349,23 @@ class TodoAPP{
 
     _ShowActivities = ()=>{
         TaskEventTable_table.innerHTML = "";
+        this._changeTableHeight();
         const table_wrapper = document.createElement('div');
         this.styler._setPadding(table_wrapper,"10px");
 
+        const scrollWrapper = document.createElement('div');
+        scrollWrapper.style.width = '100%';
+        scrollWrapper.style.overflowX = 'auto';
+        scrollWrapper.style.overflowY = 'visible';
+        scrollWrapper.style.paddingBottom = '10px';
+        scrollWrapper.style.position = 'relative';
+        
+        // Add scrollbar styling
+        scrollWrapper.style.scrollbarWidth = 'thin';
+        scrollWrapper.style.scrollbarColor = '#84A59D #f0f0f0';
+
         const table = document.createElement('table');
-        this._CreateTableHeader(table, ["","Title" , "Date" ,"Description",'Priority']);
+        this._CreateTableHeader(table, ["","Title" , "Date" ,"Description",'Priority','Catagory','Progress']);
         const tbody = document.createElement('tbody');
 
         this.$itemsOnBoard = this.__getSortedActivities(this.$Activities);
@@ -392,8 +404,22 @@ class TodoAPP{
 
         table.appendChild(tbody);
         this.styler.styleTable(table);
-        table_wrapper.appendChild(table)
+
+        scrollWrapper.appendChild(table);
+        table_wrapper.appendChild(scrollWrapper);
         TaskEventTable_table.appendChild(table_wrapper);
+    }
+
+    _changeTableHeight(){
+        if (this.$Activities.length < 4){
+            this.styler._setHeight(TodoTable,"430px");
+        }
+        else if (this.$Activities.length >= 4 && this.$Activities.length < 9){
+            this.styler._setHeight(TodoTable,"630px");
+        }
+        else{
+            return;
+        }
     }
 
     _CreateTableHeader(obj,colNames){
@@ -466,6 +492,7 @@ class TodoAPP{
                 text.textContent = "Low";
                 break;
         }
+        text.style.fontSize = "18px";
         this.styler._setFontFamily(text);
         this.styler._stylePriorityDiv(priorityWrapper,item.priority);
         priorityWrapper.appendChild(text);

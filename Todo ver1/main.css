@@ -176,6 +176,7 @@ body {
     display: flex;
     flex-direction: row;
     width: 90%;
+    height: 430px;
     margin: 0 auto;
     background-color: #fffdfb;
     border-radius: 10px;
@@ -200,7 +201,8 @@ body {
 #TaskEventTable {
     background-color: #ffffff;
     width: 80%;
-    height: 430px;
+    height: 100%;
+    overflow-x: scroll;
 }
 
 #Overlay {
@@ -307,7 +309,7 @@ body {
     padding: 10px 22px;
     margin: 0;
     border-radius: 14px 14px 0 0;
-    font-family: "DynaPuff";
+    font-family: "DynaPuff", sans-serif;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.25s ease;
@@ -580,6 +582,42 @@ textarea{
     color: #444444;
     font-size: 22px;
 }
+
+
+
+#TaskEventTable-table table th:nth-child(2),
+#TaskEventTable-table table td:nth-child(2) {
+    min-width: 150px; 
+}
+
+#TaskEventTable-table table th:nth-child(3),
+#TaskEventTable-table table td:nth-child(3) {
+    min-width: 180px; 
+}
+
+#TaskEventTable-table table th:nth-child(4),
+#TaskEventTable-table table td:nth-child(4) {
+    min-width: 250px; 
+}
+
+#TaskEventTable-table table th:nth-child(5),
+#TaskEventTable-table table td:nth-child(5) {
+    min-width: 40px; 
+}
+
+#TaskEventTable-table table th:nth-child(6),
+#TaskEventTable-table table td:nth-child(6) {
+    min-width: 40px; 
+}
+
+#TaskEventTable-table table th:nth-child(7),
+#TaskEventTable-table table td:nth-child(7) {
+    min-width: 40px; 
+}
+
+
+
+
 
 /* Calendar Layout */
 .calendar-wrapper {

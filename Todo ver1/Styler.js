@@ -37,6 +37,7 @@ class Styler{
         th.style.textAlign = "left";
         th.style.fontFamily = font_family;
         th.style.fontWeight = "500";
+        th.style.fontSize = "22px";
     }
 
     styleTd = (td ,padding="12px 16px",font_family="Quicksand") => {
@@ -44,6 +45,7 @@ class Styler{
         td.style.textAlign = "left";
         td.style.fontFamily = font_family;
         td.style.verticalAlign = "middle";
+        td.style.fontSize = "18px";
     }
 
     styleTr = (tr,border_width = "1px" ,type = "solid" ,color="#ddd" ) =>{
