@@ -46,6 +46,7 @@ const AddSectionTask_EndTime = document.getElementById('AddSectionTask-EndTime-i
 const AddSectionEvent_Title = document.getElementById('AddSectionEvent-TitleInput');
 const AddSectionEvent_Desc = document.getElementById('AddSectionEvent-DescInput');
 const AddSectionEvent_Date = document.getElementById('AddSectionEvent-Date-input');
+const AddSectionEvent_DurDiv = document.getElementById('AddSectionEvent-Duration-options');
 
 const AddSectionAddBtn = document.getElementById('AddSection-AddBtn');
 const AddSectionCloseBtn = document.getElementById('AddSection-CloseBtn');
@@ -69,6 +70,7 @@ class TodoAPP{
         this.$itemsOnBoard = null;
 
         this.styler = new Styler();
+        this._createDurOption();
         DeleteBtn.addEventListener('click' , this._DelteItems);
         SearchBtn.addEventListener('click',this.SearchSectionShow);
         
@@ -84,8 +86,36 @@ class TodoAPP{
         this.GotoTable();
     }
 
-    //  ==================     Add Task/Event     ==================
-    // In main.js, add this method to the TodoAPP class:
+    _createDurOption = ()=>{
+        let selectHour = document.createElement('select');
+        selectHour.id='hours';
+        for(let i =0;i<24;i++){
+            let option = document.createElement('option');
+            if(i%10 == i){
+               option.value = `0${i}`;
+               option.innerHTML = `0${i}`;
+            }else{
+                option.value = `${i}`;
+                option.innerHTML = `${i}`;
+            }
+            selectHour.appendChild(option);
+        }
+        let selectMin = document.createElement('select');
+        selectMin.id='minutes';
+        for(let i=0;i<60;i+=10){
+            let option = document.createElement('option');
+            if(i == 0){
+               option.value = `00`;
+               option.innerHTML = `00`;
+            }else{
+                option.value = `${i}`;
+                option.innerHTML = `${i}`;
+            }
+            selectMin.appendChild(option);
+        }
+        AddSectionEvent_DurDiv.appendChild(selectHour);
+        AddSectionEvent_DurDiv.appendChild(selectMin);
+    }
 
     updateCalendar() {
         if (this.calendar) {
@@ -189,10 +219,10 @@ class TodoAPP{
             const t = AddSectionEvent_Title.value;
             const d = AddSectionEvent_Desc.value;
             const date = AddSectionEvent_Date.value;
+            const dur = this._GetDuration();
 
 
-            this._CreatEvent(t,d,date);
-            console.log(this.$Activities);
+            this._CreatEvent(t,d,date,dur);
             this._CloseAddSection();
 
 
@@ -201,6 +231,20 @@ class TodoAPP{
         }
     }
 
+    _GetDuration = () => {
+        const hourSelect = document.getElementById('hours');
+        const minSelect = document.getElementById('minutes');
+        
+        if (!hourSelect || !minSelect) {
+            console.error('Duration selects not found');
+            return 0;
+        }
+        
+        const hours = parseInt(hourSelect.value) || 0;
+        const minutes = parseInt(minSelect.value) || 0;
+
+        return (hours * 60) + minutes;
+    }
     _AssignID(){
         this.$LastID++;
         return this.$LastID;
@@ -387,7 +431,19 @@ class TodoAPP{
         }
         else{
             const date = moment(a.date).format('MMM DD, HH:mm');
-            return [a.title , `${date}` ,this._cutDescription(a.descript)];
+            const dur = this._durToString(a.duration);
+            return [a.title , `${date} ${dur}` ,this._cutDescription(a.descript)];
+        }
+    }
+
+    _durToString(dur){
+        let mins = dur%60;
+        let hours = Math.floor(dur/60);
+        if (hours >0){
+            return `for ${hours} hours and ${mins} minutes`;
+        }else{
+            return `for ${dur} minutes`;
+            
         }
     }
 
@@ -528,7 +584,7 @@ class TodoAPP{
         if (existingTag) {
             TagsDiv.removeChild(existingTag);
         }
-        
+
         const tagWrapper = document.createElement('div');
         tagWrapper.id = 'SearchTag';
         const tagName = document.createElement('span');

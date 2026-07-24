@@ -387,6 +387,7 @@ body {
     background-color: #FFFDFB;
     font-family: inherit;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-family: 'quicksand';
 }
 #AddSectionBodyLayer {
     background-color: #ffffff;
@@ -400,25 +401,26 @@ body {
 
 #AddSectionTask-DescInput:focus, #AddSectionEvent-DescInput:focus {
     outline: none;
-    border-color: #F284F2;
+    border-color: #F28482;
     box-shadow: 0 0 0 3px rgba(242, 132, 242, 0.2);
 }
 
 #AddSectionTask-TitleInput, #AddSectionEvent-TitleInput, 
 #AddSectionTask-StartTime-input, #AddSectionTask-EndTime-input, 
-#AddSectionEvent-Date-input {
+#AddSectionEvent-Date-input , #AddSectionEvent-Duration-input {
     border: none;
     border-bottom: 2px solid #F5CAC3;
     background-color: transparent;
     padding: 6px 10px;
     outline: none;
     transition: border-color 0.25s ease;
+    font-family: 'quicksand';
 }
 
 #AddSectionTask-TitleInput:focus, #AddSectionEvent-TitleInput:focus, 
 #AddSectionTask-StartTime-input:focus, #AddSectionTask-EndTime-input:focus, 
-#AddSectionEvent-Date-input:focus {
-    border-bottom-color: #F284F2;
+#AddSectionEvent-Date-input:focus ,#AddSectionEvent-Duration-input:focus{
+    border-bottom-color: #F28482;
 }
 
 #AddSectionFooter {
@@ -462,6 +464,99 @@ textarea{
     width: 400px;
 }
 
+#AddSectionEvent-Duration {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 16px;
+    padding: 10px 0;
+}
+
+#AddSectionEvent-Duration-options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+#AddSectionEvent-Duration-options select {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px 12px;
+    border: 2px solid #F5CAC3;
+    border-radius: 10px;
+    background-color: #FFFDFB;
+    color: #4A4A4A;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    min-width: 70px;
+    appearance: auto;
+}
+
+#AddSectionEvent-Duration-options select:hover {
+    border-color: #84A59D;
+    background-color: #f8f9f9;
+}
+
+#AddSectionEvent-Duration-options select:focus {
+    border-color: #F28482;
+    box-shadow: 0 0 0 3px rgba(242, 132, 130, 0.15);
+}
+
+#AddSectionEvent-Duration-options select option {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 400;
+    padding: 8px;
+    background-color: #FFFDFB;
+    color: #4A4A4A;
+}
+
+#AddSectionEvent-Duration-options .duration-colon {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #84A59D;
+    padding: 0 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #AddSectionEvent-Duration {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    #AddSectionEvent-Duration-options {
+        width: 100%;
+    }
+    
+    #AddSectionEvent-Duration-options select {
+        flex: 1;
+        min-width: 60px;
+    }
+}el
+
+#AddSectionEvent-Time {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 10px 0;
+}
+
+#AddSectionEvent-Duration-options select option:checked {
+    background-color: #F5CAC3;
+    color: #4A4A4A;
+}
+
+#AddSectionEvent-Duration-options select option:hover {
+    background-color: #F7EDE2;
+}
+
 #DeleteTodo , #SearchTodo , #FilterTodo{
     width: 45px;
     height: 45px;
@@ -477,6 +572,13 @@ textarea{
     color: #f2f2f2;
     background-color: #84A59D;
     transition-duration: 300ms;
+}
+
+#AddSection label,h3{
+    font-family: 'DynaPuff';
+    font-weight: 400;
+    color: #444444;
+    font-size: 22px;
 }
 
 /* Calendar Layout */
