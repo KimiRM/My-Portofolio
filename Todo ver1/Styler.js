@@ -78,6 +78,11 @@ class Styler{
     _setWidth = (obj , width="100%") => {
         obj.style.width=width;
     }
+
+    _setHeight = (obj , height="100%") => {
+        obj.style.height=height;
+    }
+
     _setDisplayFlex = (obj , direction="column",justify_content="center",align_items="center",gap="10px") => {
         obj.style.display = "flex";
         obj.style.flexDirection = direction;
@@ -89,5 +94,29 @@ class Styler{
     }
     _setFontFamily(obj , font_family='quicksand'){
         obj.style.fontFamily = font_family;
+    }
+
+    _styleTagDiv(div){
+        div.style.backgroundColor = "transparent";
+        this._setBorder(div,"2px","#84A59D","solid");
+        this._setBorderRaidus(div,"10px");
+        this._setWidth(div,"60px");
+        this._setHeight(div,"30px");
+        div.style.display="flex";
+        div.style.flexDirection="row";
+        div.style.alignItems = "center";
+        div.style.gap="10px";
+        div.style.padding="5px";
+    }
+
+    _styleClearTagBtn(btn){
+        this._setWidth(btn,"25px");
+        this._setHeight(btn,"25px");
+        this._setBorder(btn,"none","","");
+        this._setBorderRaidus(btn,"50%");
+        btn.style.color="#84A59D";
+        this._setBg(btn,"transparent");
+        this._setPadding(btn,"auto");
+        btn.style.boxShadow = "none";
     }
 }

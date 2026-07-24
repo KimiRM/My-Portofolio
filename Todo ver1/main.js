@@ -2,13 +2,14 @@
 
 const GotoBtn = document.getElementById('GotoBtn');
 
-// =================   Table Section    ===================
+// =================   Right Menu Section    ===================
 
 const AddBtn = document.getElementById('AddTodo');
 const DeleteBtn = document.getElementById('DeleteTodo');
 const EditBtn = document.getElementById('EditTodo');
 const SearchBtn = document.getElementById('SearchTodo');
 const FilterBtn = document.getElementById('FilterTodo');
+const TagsDiv = document.getElementById('tags');
 
 
 // =================   Table Section    ===================
@@ -20,6 +21,7 @@ const TableRightMenu = document.getElementById('RightMenu');
 const TableLeftMenu = document.getElementById('LeftMenu');
 
 // =================   OverLay Section    ===================
+
 const Overlay = document.getElementById('Overlay');
 
 // =================   Add Section    ===================
@@ -63,12 +65,13 @@ class TodoAPP{
         this.$LastID = 0;
         this.$SelectedItems = [];
         this.$filteredDate = null;
+        this.$searchedItem = null;
         this.$itemsOnBoard = null;
 
         this.styler = new Styler();
         DeleteBtn.addEventListener('click' , this._DelteItems);
         SearchBtn.addEventListener('click',this.SearchSectionShow);
-        SearchSectionBtn.addEventListener('click',this.SearchTodos);
+        
 
         setTimeout(() => {
             this.calendar = new Calendar(this);
@@ -245,11 +248,10 @@ class TodoAPP{
         this._CreateTableHeader(table, ["","Title" , "Date" ,"Description"])
         const tbody = document.createElement('tbody');
 
-        this.$itemsOnBoard=this.$Activities;
-        let activities = this.__getSortedActivities(this.$Activities);
+        this.$itemsOnBoard = this.__getSortedActivities(this.$Activities);
 
         if (this.$filteredDate) {
-            this.$itemsOnBoard = activities.filter(a => {
+            this.$itemsOnBoard = this.$itemsOnBoard.filter(a => {
                 if (a.type === 'Task') {
                     return moment(a.Start).isSame(this.$filteredDate, 'day');
                 } else {
@@ -258,7 +260,20 @@ class TodoAPP{
             });
         }
 
-        for (let a of activities){
+        if(this.$searchedItem){
+            let activities = this.$itemsOnBoard.filter(a => {
+               return a.title.includes(this.$searchedItem) || a.descript.includes(this.$searchedItem)
+            });
+            if (activities.length == 0){
+                window.alert('Nothing Found');
+            }
+            else{
+                this.$itemsOnBoard = activities;
+                this._createSearchTag();
+            }
+        }
+
+        for (let a of this.$itemsOnBoard){
             let aTostr = this.__ActivityToString(a);
             const row = this._CreateTableBodyRows(tbody, aTostr , a.id);
 
@@ -492,18 +507,55 @@ class TodoAPP{
     SearchSectionShow = () => {
         Overlay.style.display="block";
         SearchSection.style.display = "block";
+
+        SearchSectionBtn.removeEventListener('click',this.SearchTodos);
+        SearchSectionBtn.addEventListener('click',this.SearchTodos);
+
+        SearchInput.addEventListener('keypress',(event)=>{
+            if (event.key === 'Enter') {
+                this.SearchTodos();
+            }
+        });
     }
     SearchTodos=()=>{
-        let str = SearchInput.value;
-        this._search(str);
+        this.$searchedItem = SearchInput.value;
         this._ShowActivities();
         this._CloseSearch();
     }
 
-    _search = (str) => {
-        this.$itemsOnBoard = this.$itemsOnBoard.filter(a => {
-            a.title.find(str) || a.descript.find(str)
-        });
+    _createSearchTag = () => {
+        const existingTag = document.getElementById('SearchTag');
+        if (existingTag) {
+            TagsDiv.removeChild(existingTag);
+        }
+        
+        const tagWrapper = document.createElement('div');
+        tagWrapper.id = 'SearchTag';
+        const tagName = document.createElement('span');
+        tagName.textContent = this.$searchedItem;
+        tagName.style.color = "#84A59D";
+        tagName.style.fontWeight = '400';
+        const clear = document.createElement('button');
+        clear.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+
+        clear.removeEventListener('click',this._clearSearchTag);
+        clear.addEventListener('click',this._clearSearchTag);
+
+        this.styler._setFontFamily(tagName,'DynaPuff');
+        this.styler._styleTagDiv(tagWrapper);
+        this.styler._styleClearTagBtn(clear);
+
+        tagWrapper.appendChild(tagName);
+        tagWrapper.appendChild(clear);
+        TagsDiv.appendChild(tagWrapper);
+        
+    }
+
+    _clearSearchTag = ()=> {
+        this.$searchedItem = null;
+        let st = document.getElementById('SearchTag');
+        st.remove();
+        this._ShowActivities();
     }
 
     _CloseSearch(){
