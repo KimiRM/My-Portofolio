@@ -425,13 +425,6 @@ body {
     border-bottom-color: #F28482;
 }
 
-#AddSectionFooter {
-    display: flex;
-    justify-content: flex-end;
-    gap: 15px;
-    margin-top: 20px;
-}
-
 #AddSection-AddBtn, #AddSection-CloseBtn {
     color: #4A4A4A;
     background-color: #ffffff;
@@ -483,7 +476,7 @@ textarea{
     flex: 1;
 }
 
-#AddSectionEvent-Duration-options select , #AddSectionEvent-Priority select , #AddSectionTask-Priority select{
+#AddSectionEvent-Duration-options select , #AddSectionEvent-Priority select , #AddSectionTask-Priority select , #AddSectionEvent-Category select ,#AddSectionTask-Category select{
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
     font-size: 14px;
@@ -499,17 +492,17 @@ textarea{
     appearance: auto;
 }
 
-#AddSectionEvent-Duration-options select:hover , #AddSectionEvent-Priority select:hover ,#AddSectionEvent-Priority select:hover{
+#AddSectionEvent-Duration-options select:hover , #AddSectionEvent-Priority select:hover ,#AddSectionEvent-Priority select:hover , #AddSectionEvent-Category select:hover ,#AddSectionTask-Category select:hover{
     border-color: #84A59D;
     background-color: #f8f9f9;
 }
 
-#AddSectionEvent-Duration-options select:focus , #AddSectionEvent-Priority select:focus ,#AddSectionEvent-Priority select:focus{
+#AddSectionEvent-Duration-options select:focus , #AddSectionEvent-Priority select:focus ,#AddSectionEvent-Priority select:focus, #AddSectionEvent-Category select:focus ,#AddSectionTask-Category select:focus{
     border-color: #F28482;
     box-shadow: 0 0 0 3px rgba(242, 132, 130, 0.15);
 }
 
-#AddSectionEvent-Duration-options select option,  #AddSectionEvent-Priority select option , #AddSectionEvent-Priority select option{
+#AddSectionEvent-Duration-options select option,  #AddSectionEvent-Priority select option , #AddSectionEvent-Priority select option , #AddSectionEvent-Category select option ,#AddSectionTask-Category select option{
     font-family: 'Quicksand', sans-serif;
     font-weight: 400;
     padding: 8px;
@@ -607,7 +600,7 @@ textarea{
 
 #TaskEventTable-table table th:nth-child(6),
 #TaskEventTable-table table td:nth-child(6) {
-    min-width: 40px; 
+    min-width: 60px; 
 }
 
 #TaskEventTable-table table th:nth-child(7),

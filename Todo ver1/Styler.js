@@ -154,4 +154,29 @@ class Styler{
     _setColor(obj,color){
         obj.style.color = color;
     }
+    _styleCategoryDiv = (div,type) =>{
+        this._setBorderRaidus(div,"5px");
+        this._setBg(div,"transparent");
+        div.style.display= "inline-flex";
+        div.style.flexDirection = "row";
+        div.style.gap= "5px";
+        div.style.padding = "4px 12px"; 
+        div.style.alignItems = "center";
+        div.style.justifyContent = "center";
+
+        switch (type){
+            case PERSONAL:
+                this._setBorder(div,"1px","#f28482","solid");
+                break;
+            case WORK:
+                this._setBorder(div,"1px","#84A59D","solid");
+                break;
+            case EDUCATIONAL:
+                this._setBorder(div,"1px","#f6bd60","solid");
+                break;
+            default:
+                this._setBorder(div,"1px","#f28482","solid");
+                break;
+        }
+    }
 }

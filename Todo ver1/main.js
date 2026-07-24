@@ -65,7 +65,11 @@ const MEDIUM = 2;
 const HIGH = 3;
 const URGENT = 4;
 
+// =================   Categories    ===================
 
+const PERSONAL = 1;
+const WORK = 2;
+const EDUCATIONAL = 3;
 
 
 
@@ -193,27 +197,14 @@ class TodoAPP{
             const st = AddSectionTask_StartTime.value;
             const et = AddSectionTask_EndTime.value;
             const p = this._GetPriorityTask();
+            const c = this._GetCategoryTask();
 
-            this._CreatTask(t,d,st,et,p);
+            this._CreatTask(t,d,st,et,p,c);
             this._CloseAddSection();
 
         }catch(err){
             console.log(err.message);
         }
-    }
-
-    _CloseAddSection = ()=>{
-        AddSectionTask_Title.value ="" ;
-        AddSectionTask_Desc.value = "";
-        AddSectionEvent_Title.value ="" ;
-        AddSectionEvent_Desc.value = "";
-        Overlay.style.display = "none";
-        AddSection.style.display = "none";
-        AddSectionTaskDiv.style.display = "none";
-        AddSectionEventDiv.style.display = "none";
-        AddSectionFooter.style.display = "none";
-        this.styler._setBg(AddSectionTaskBtn,"#ffffff");
-        this.styler._setBg(AddSectionEventBtn,"#F5CAC3");
     }
 
     _AddTodo_Event = () =>{
@@ -239,9 +230,10 @@ class TodoAPP{
             const date = AddSectionEvent_Date.value;
             const dur = this._GetDuration();
             const p = this._GetPriorityEvent();
+            const c = this._GetCategoryEvent();
 
 
-            this._CreatEvent(t,d,date,dur,p);
+            this._CreatEvent(t,d,date,dur,p,c);
             this._CloseAddSection();
 
 
@@ -307,12 +299,50 @@ class TodoAPP{
         }
 
     }
+    _GetCategoryTask=()=>{
+        const taskSelect = document.getElementById('TaskCategory');
+        
+        if (!taskSelect) {
+            console.error('Category not found');
+            return 0;
+        }
+        switch(taskSelect.value){
+            case "PERSONAL": 
+                return PERSONAL;
+            case "WORK":
+                return WORK;
+            case "EDUCATIONAL":
+                return EDUCATIONAL;
+            default:
+                return PERSONAL;
+        }
+
+    }
+    _GetCategoryEvent=()=>{
+        const eventSelect = document.getElementById('EventCategory');
+        
+        if (!eventSelect) {
+            console.error('Category not found');
+            return 0;
+        }
+        switch(eventSelect.value){
+            case "PERSONAL": 
+                return PERSONAL;
+            case "WORK":
+                return WORK;
+            case "EDUCATIONAL":
+                return EDUCATIONAL;
+            default:
+                return PERSONAL;
+        }
+
+    }
     _AssignID(){
         this.$LastID++;
         return this.$LastID;
     }
 
-    _CreatTask(title="Undefined",desc="",start=moment().format("YYYYMMDD"),end=moment().format("YYYYMMDD"),priority=LOW){
+    _CreatTask(title="Undefined",desc="",start=moment().format("YYYYMMDD"),end=moment().format("YYYYMMDD"),priority=LOW,category=PERSONAL){
         const newTask = {
             id: this._AssignID(),
             type: "Task",
@@ -320,14 +350,15 @@ class TodoAPP{
             descript: desc,
             Start: start,
             End: end,
-            priority: priority
+            priority: priority,
+            catagory: category
         };
         this.$Activities.push(newTask);
         this._ShowActivities();
         this.updateCalendar();
     }
 
-    _CreatEvent(title="Undefined",desc="",date=moment().format("YYYYMMDD"),dur=0,priority=LOW){
+    _CreatEvent(title="Undefined",desc="",date=moment().format("YYYYMMDD"),dur=0,priority=LOW,category=PERSONAL){
         const newEvent = {
             id: this._AssignID(),
             type: "Event",
@@ -335,11 +366,26 @@ class TodoAPP{
             descript: desc,
             date: date,
             duration: dur,
-            priority: priority
+            priority: priority,
+            category: category
         };
         this.$Activities.push(newEvent);
         this._ShowActivities();
         this.updateCalendar();
+    }
+
+    _CloseAddSection = ()=>{
+        AddSectionTask_Title.value ="" ;
+        AddSectionTask_Desc.value = "";
+        AddSectionEvent_Title.value ="" ;
+        AddSectionEvent_Desc.value = "";
+        Overlay.style.display = "none";
+        AddSection.style.display = "none";
+        AddSectionTaskDiv.style.display = "none";
+        AddSectionEventDiv.style.display = "none";
+        AddSectionFooter.style.display = "none";
+        this.styler._setBg(AddSectionTaskBtn,"#ffffff");
+        this.styler._setBg(AddSectionEventBtn,"#F5CAC3");
     }
 
     filterActivitiesByDate(date) {
@@ -437,14 +483,25 @@ class TodoAPP{
 
     _CreateTableBodyRows(obj,colValues,id){
         const tr = document.createElement('tr');
-        this.__createCheckBox(tr,id);
+
+        const checkboxCol = document.createElement('td');
+        this.__createCheckBox(checkboxCol, id);
+        tr.appendChild(checkboxCol);
 
         for (let s of colValues){
             const col = document.createElement('td');
             col.textContent = s;
             tr.appendChild(col);
         }
-        this._showPriority(tr,id);
+
+        const priorityCol = document.createElement('td');
+        this._showPriority(priorityCol, id);
+        tr.appendChild(priorityCol);
+
+        const categoryCol = document.createElement('td');
+        this._showCategory(categoryCol, id);  
+        tr.appendChild(categoryCol);
+
         obj.appendChild(tr);
         return tr;
     }
@@ -457,7 +514,7 @@ class TodoAPP{
         cb.addEventListener('change', () => {
             this._UpdateSelectedItems(cb.id);
         });
-
+     
         obj.appendChild(cb);
     }
 
@@ -497,6 +554,41 @@ class TodoAPP{
         this.styler._stylePriorityDiv(priorityWrapper,item.priority);
         priorityWrapper.appendChild(text);
         tr.appendChild(priorityWrapper);
+    }
+
+    _showCategory(tr,id){
+        let item = this.$Activities.find(a => a.id == id);
+
+        if (!item) {
+            console.warn(`Activity with id ${id} not found`);
+            return;
+        }
+
+        const categoryWrapper = document.createElement('div');
+        const text = document.createElement('span');
+        switch (item.category){
+            case PERSONAL:
+                text.textContent = "Personal";
+                this.styler._setColor(text,'#f28482');
+                break;
+            case WORK:
+                this.styler._setColor(text,'#84A59D');
+                text.textContent = "Work";
+                break;
+            case EDUCATIONAL:
+                text.textContent = "Educational";
+                this.styler._setColor(text,'#f6bd60');
+                break;
+            default:
+                text.textContent = "Personal";
+                this.styler._setColor(text,'#f28482');
+                break;
+        }
+        text.style.fontSize = "18px";
+        this.styler._setFontFamily(text);
+        this.styler._styleCategoryDiv(categoryWrapper,item.category);
+        categoryWrapper.appendChild(text);
+        tr.appendChild(categoryWrapper);
     }
 
     addClearFilterButton() {
