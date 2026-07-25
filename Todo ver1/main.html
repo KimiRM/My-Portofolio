@@ -167,6 +167,13 @@
               <option value="EDUCATIONAL">Educational</option>
             </select>
           </div>
+          <div id="AddSectionTask-Progress">
+            <div class="slidecontainer">
+              <label >Progress: </label>
+              <span class="progress-value" id="progressValue" style="font-family: 'DynaPuff';font-weight: 300;font-size: 20px;">0%</span>
+              <input type="range" min="0" max="100" value="0" step="10" class="range-slider" id="myRange">
+            </div>
+          </div>
         </div>
 
         <div id="AddSectionEvent">
@@ -213,16 +220,21 @@
               <option value="EDUCATIONAL">Educational</option>
             </select>
           </div>
+          <div id="AddSectionEvent-Progress">
+            <label>Completed: </label>
+            <label class="switch">
+              <input type="checkbox" id="progressEvent">
+              <span class="slider round"></span>
+            </label>
           </div>
+        </div>
       </div>
-      
+
       <div id="AddSectionFooter">
         <button id="AddSection-AddBtn">Add</button>
         <button id="AddSection-CloseBtn">Close</button>
       </div>
     </div>
-
-
 
     <div id="footer">
       <div class="footer-links">

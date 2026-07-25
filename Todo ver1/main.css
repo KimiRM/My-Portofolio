@@ -175,7 +175,7 @@ body {
 #TodoTable {
     display: flex;
     flex-direction: row;
-    width: 90%;
+    width: 98%;
     height: 430px;
     margin: 0 auto;
     background-color: #fffdfb;
@@ -185,7 +185,7 @@ body {
 
 #LeftMenu {
     border: none;
-    width: 30%;
+    width: 25%;
     height: 430px;
 }
 #RightMenu{
@@ -195,7 +195,7 @@ body {
     padding: 10px;
     gap: 20px;
     border: none;
-    width: 7%;
+    width: 5%;
     height: 430px;
 }
 #TaskEventTable {
@@ -828,4 +828,181 @@ textarea{
     font-weight: 500;
     color: #4A4A4A;                        
     letter-spacing: 0.5px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.switch input:checked +  .slider {
+  background-color: #F28482;
+}
+
+.switch input:focus +  .slider {
+  box-shadow: 0 0 1px #F28482;
+}
+
+.switch input:checked +  .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* Progress Task */
+
+/* Progress bar container - aligns everything horizontally */
+#AddSectionTask-Progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+#AddSectionTask-Progress label {
+  min-width: 70px;
+  font-weight: 500;
+}
+
+.slidecontainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.slider-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+/* Value remark next to slider */
+.progress-value {
+  min-width: 45px;
+  font-weight: 600;
+  color: #f28482;
+  font-size: 0.95rem;
+  text-align: center;
+  background: rgba(242, 132, 130, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(242, 132, 130, 0.2);
+  white-space: nowrap;
+}
+
+/* Custom range input */
+input[type="range"].range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  outline: none;
+  transition: background 0.3s;
+}
+
+/* Track */
+input[type="range"].range-slider::-webkit-slider-runnable-track {
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 10px;
+}
+
+input[type="range"].range-slider::-moz-range-track {
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  border: none;
+}
+
+/* Thumb - webkit */
+input[type="range"].range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #f28482;
+  border-radius: 50%;
+  margin-top: -6px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(242, 132, 130, 0.4);
+  transition: 0.2s;
+}
+
+input[type="range"].range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(242, 132, 130, 0.5);
+}
+
+/* Thumb - firefox */
+input[type="range"].range-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: #f28482;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(242, 132, 130, 0.4);
+}
+
+input[type="range"].range-slider::-moz-range-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* Filled track color */
+input[type="range"].range-slider::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #f28482 0%, #f28482 var(--progress, 0%), #e0e0e0 var(--progress, 0%), #e0e0e0 100%);
+}
+
+input[type="range"].range-slider::-moz-range-track {
+  background: #e0e0e0;
+}
+
+input[type="range"].range-slider::-moz-range-progress {
+  background: #f28482;
+  height: 6px;
+  border-radius: 10px;
 }

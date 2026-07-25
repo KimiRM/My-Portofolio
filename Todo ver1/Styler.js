@@ -179,4 +179,16 @@ class Styler{
                 break;
         }
     }
+
+    _styleProgressDiv = (div) =>{
+        this._setBorderRaidus(div,"5px");
+        this._setBg(div,"transparent");
+        div.style.display= "inline-flex";
+        div.style.flexDirection = "row";
+        div.style.gap= "5px";
+        div.style.padding = "4px 12px"; 
+        div.style.alignItems = "center";
+        div.style.justifyContent = "center";
+        div.style.flexShrink = "0";
+    }
 }
