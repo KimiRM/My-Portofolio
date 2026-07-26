@@ -236,6 +236,65 @@
       </div>
     </div>
 
+    <div id="FilterSection">
+      <div id="FilterSection-DateFrom">
+              <label>From: </label>
+              <input
+                type="datetime-local"
+                id="filter-DateFrom-input"
+              />
+      </div>
+      <div id="FilterSection-DateTo">
+              <label>To: </label>
+              <input type="datetime-local" id="filter-DateTo-input" />
+      </div>
+      <div id="FilterSection-Type">
+        <label>Type: </label>
+            <select id="filter-type">
+              <option value="None">--</option>
+              <option value="Task">Task</option>
+              <option value="Event">Event</option>
+            </select>
+      </div>
+      <div id="FilterSection-Priority">
+        <label>Priority: </label>
+            <select id="filter-priority">
+              <option value="None">--</option>
+              <option value="LOW">Low</option>
+              <option value="MEDIUM">Medium</option>
+              <option value="HIGH">High</option>
+              <option value="URGENT">Urgent</option>
+            </select>
+      </div>
+      <div id="FilterSection-Category">
+        <label>Category: </label>
+            <select id="filter-category">
+              <option value="None">--</option>
+              <option value="WORK">Work</option>
+              <option value="PERSONAL">Personal</option>
+              <option value="EDUCATIONAL">Educational</option>
+            </select>
+      </div>
+      <div id="FilterSection-Progress">
+        <label>Progress: </label>
+            <select id="Filter-progress">
+              <option value="None">--</option>
+              <option>0%</option>
+              <option>10%</option>
+              <option>20%</option>
+              <option>30%</option>
+              <option>40%</option>
+              <option>50%</option>
+              <option>60%</option>
+              <option>70%</option>
+              <option>80%</option>
+              <option>90%</option>
+              <option>100%</option>
+            </select>
+      </div>
+      <button id="FilterBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+
     <div id="footer">
       <div class="footer-links">
         <div id="footerContactLinks">
@@ -277,6 +336,7 @@
     </div>
 
     <script src="main.js"></script>
+    <script src="TodoApp.js"></script>
     <script src="Styler.js"></script>
     <script src="Calendar.js"></script>
   </body>

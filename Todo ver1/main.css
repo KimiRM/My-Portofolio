@@ -899,11 +899,6 @@ textarea{
   margin: 8px 0;
 }
 
-#AddSectionTask-Progress label {
-  min-width: 70px;
-  font-weight: 500;
-}
-
 .slidecontainer {
   display: flex;
   align-items: center;
@@ -1005,4 +1000,108 @@ input[type="range"].range-slider::-moz-range-progress {
   background: #f28482;
   height: 6px;
   border-radius: 10px;
+}
+
+
+
+#FilterSection{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff; /* Cozy warm base */
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(242, 132, 242, 0.15);
+    z-index: 1000;
+    max-width: 1200px;
+    width: 90%;
+    max-height: 90vh;
+    border: 2px solid #F5CAC3;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: center;
+    justify-content:space-evenly;
+}
+
+#FilterSection-DateFrom , #FilterSection-DateTo ,#FilterSection-Priority , #FilterSection-Category , #FilterSection-Type , #FilterSection-Progress{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+#FilterSection-Priority select, #FilterSection-Category select, #FilterSection-Type select, #FilterSection-Progress select{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px 12px;
+    border: 2px solid #F5CAC3;
+    border-radius: 10px;
+    background-color: #FFFDFB;
+    color: #4A4A4A;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    min-width: 70px;
+    appearance: auto;
+}
+
+#FilterSection-Priority select:hover, #FilterSection-Category select:hover, #FilterSection-Type select:hover, #FilterSection-Progress select:hover{
+    border-color: #84A59D;
+    background-color: #f8f9f9;
+}
+
+#FilterSection-Priority select:focus, #FilterSection-Category select:focus, #FilterSection-Type select:focus, #FilterSection-Progress select:focus{
+    border-color: #F28482;
+    box-shadow: 0 0 0 3px rgba(242, 132, 130, 0.15);
+}
+
+#FilterSection-Priority select option, #FilterSection-Category select option, #FilterSection-Type select option, #FilterSection-Progress select option{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 400;
+    padding: 8px;
+    background-color: #FFFDFB;
+    color: #4A4A4A;
+}
+
+#FilterSection label{
+    font-family: 'DynaPuff';
+    font-weight: 400;
+    color: #444444;
+    font-size: 20px;
+}
+
+#FilterSection button{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    padding: auto;
+    color: #84A59D;
+    background-color: transparent;
+    border: 2px solid #84A59D;
+    box-shadow: none;
+}
+
+#FilterSection button:hover{
+    color: #f2f2f2;
+    background-color: #84A59D;
+    transition-duration: 300ms;
+}
+
+#FilterSection input {
+    border: none;
+    border-bottom: 2px solid #F5CAC3;
+    background-color: transparent;
+    padding: 6px 10px;
+    outline: none;
+    transition: border-color 0.25s ease;
+    font-family: 'quicksand';
+    font-size: 18px;
+}
+
+#FilterSection input:focus{
+    border-bottom-color: #F28482;
 }
