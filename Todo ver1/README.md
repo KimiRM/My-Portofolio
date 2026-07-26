@@ -6,6 +6,12 @@
 
 ---
 
+## 🎥 Demo
+
+🎬 **Watch the demo here:** [Todo-demo_3.mp4](Todo-demo_3.mp4)
+
+---
+
 ## ✨ Features
 
 ### 📝 Tasks & Events
