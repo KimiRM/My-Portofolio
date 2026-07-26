@@ -71,8 +71,8 @@ const FilterDateTo = document.getElementById("filter-DateTo-input");
 const FilterPriority = document.getElementById("filter-priority");
 const FilterCategory = document.getElementById("filter-category");
 const FilterType = document.getElementById("filter-type");
-const FilterProgress = document.getElementById("filter-progress");
-const FilterSectionBtn = document.getElementById("FilterBtn");
+const FilterProgress = document.getElementById("Filter-progress");
+const FilterSearchBtn = document.getElementById("FilterSearchBtn");
 
 // =================   Priorities    ===================
 const LOW = 1;
@@ -94,7 +94,9 @@ class TodoAPP {
     this.$filteredDate = null;
     this.$searchedItem = null;
     this.$itemsOnBoard = null;
+    this.$filteredItems = null;
 
+  
     this.styler = new Styler();
     this._createDurOption();
     AddBtn.addEventListener("click", this.AddToDo);
@@ -284,19 +286,9 @@ class TodoAPP {
       console.error("Priority not found");
       return 0;
     }
-    switch (taskSelect.value) {
-      case "LOW":
-        return LOW;
-      case "MEDIUM":
-        return MEDIUM;
-      case "HIGH":
-        return HIGH;
-      case "URGENT":
-        return URGENT;
-      default:
-        return LOW;
-    }
+    return this._GetPriorityValue(taskSelect);
   };
+
   _GetPriorityEvent = () => {
     const eventSelect = document.getElementById("EventPriority");
 
@@ -304,7 +296,12 @@ class TodoAPP {
       console.error("Priority not found");
       return 0;
     }
-    switch (eventSelect.value) {
+
+    return this._GetPriorityValue(eventSelect);
+  };
+
+  _GetPriorityValue = (select) => {
+        switch (select.value) {
       case "LOW":
         return LOW;
       case "MEDIUM":
@@ -316,7 +313,8 @@ class TodoAPP {
       default:
         return LOW;
     }
-  };
+  }
+
   _GetCategoryTask = () => {
     const taskSelect = document.getElementById("TaskCategory");
 
@@ -324,17 +322,10 @@ class TodoAPP {
       console.error("Category not found");
       return 0;
     }
-    switch (taskSelect.value) {
-      case "PERSONAL":
-        return PERSONAL;
-      case "WORK":
-        return WORK;
-      case "EDUCATIONAL":
-        return EDUCATIONAL;
-      default:
-        return PERSONAL;
-    }
+
+    return this._GetCategoryValue(taskSelect);
   };
+
   _GetCategoryEvent = () => {
     const eventSelect = document.getElementById("EventCategory");
 
@@ -342,7 +333,11 @@ class TodoAPP {
       console.error("Category not found");
       return 0;
     }
-    switch (eventSelect.value) {
+    return this._GetCategoryValue(eventSelect);
+  };
+
+  _GetCategoryValue = (select) => {
+        switch (select.value) {
       case "PERSONAL":
         return PERSONAL;
       case "WORK":
@@ -352,7 +347,8 @@ class TodoAPP {
       default:
         return PERSONAL;
     }
-  };
+  }
+
   _GetProgressTask = () => {
     const progressSelect = document.getElementById("myRange");
 
@@ -467,7 +463,6 @@ class TodoAPP {
     scrollWrapper.style.paddingBottom = "10px";
     scrollWrapper.style.position = "relative";
 
-    // Add scrollbar styling
     scrollWrapper.style.scrollbarWidth = "thin";
     scrollWrapper.style.scrollbarColor = "#84A59D #f0f0f0";
 
@@ -508,6 +503,10 @@ class TodoAPP {
         this.$itemsOnBoard = activities;
         this._createSearchTag();
       }
+    }
+
+    if(this.$filteredItems && Object.keys(this.$filteredItems).length > 0){
+      this.__filterActivities();
     }
 
     for (let a of this.$itemsOnBoard) {
@@ -591,6 +590,73 @@ class TodoAPP {
     obj.appendChild(cb);
   }
 
+  __filterActivities() {
+  if (!this.$filteredItems || Object.keys(this.$filteredItems).length === 0) {
+    return; 
+  }
+
+  this.$itemsOnBoard = this.$itemsOnBoard.filter((activity) => {
+    let match = true;
+
+    for (let [key, value] of Object.entries(this.$filteredItems)) {
+      switch (key) {
+        case 'DateFrom':
+          const activityDate = activity.type === "Task" 
+            ? moment(activity.Start) 
+            : moment(activity.date);
+          
+          if (activityDate.isBefore(moment(value), 'day')) {
+            match = false;
+          }
+          break;
+
+        case 'DateTo':
+          const activityDateTo = activity.type === "Task" 
+            ? moment(activity.Start) 
+            : moment(activity.date);
+          
+          if (activityDateTo.isAfter(moment(value), 'day')) {
+            match = false;
+          }
+          break;
+
+        case 'Priority':
+          if (activity.priority !== value) {
+            match = false;
+          }
+          break;
+
+        case 'Type':
+          if (activity.type !== value) {
+            match = false;
+          }
+          break;
+
+        case 'Category':
+          if (activity.category !== value) {
+            match = false;
+          }
+          break;
+
+        case 'Progress':
+          if (activity.progress !== value) {
+            match = false;
+          }
+          break;
+
+        default:
+          break;
+      }
+    }
+
+    return match;
+  });
+
+  if (this.$itemsOnBoard.length === 0) {
+    console.log("No activities match the filters");
+  }
+}
+
   _showPriority(td, id) {
     let item = this.$Activities.find((a) => a.id == id);
 
@@ -664,7 +730,7 @@ class TodoAPP {
     td.appendChild(categoryWrapper);
   }
 
-_showProgress(td, id) {
+  _showProgress(td, id) {
     let item = this.$Activities.find((a) => a.id == id);
 
     if (!item) {
@@ -714,7 +780,7 @@ _showProgress(td, id) {
     wrapper.appendChild(canvas);
     wrapper.appendChild(text);
     td.appendChild(wrapper);
-}
+  }
 
   addClearFilterButton() {
     const clearBtn = document.createElement("button");
@@ -936,6 +1002,7 @@ _showProgress(td, id) {
       }
     });
   };
+
   SearchTodos = () => {
     this.$searchedItem = SearchInput.value;
     this._ShowActivities();
@@ -982,17 +1049,59 @@ _showProgress(td, id) {
     Overlay.style.display = "none";
   }
 
-  FilterSectionShow(){
+  FilterSectionShow = () => {
     Overlay.style.display = "block";
     FilterSection.style.display = "flex";
-    
 
+    FilterSearchBtn.removeEventListener('click' , this.FilterTodos);
+    FilterSearchBtn.addEventListener('click',this.FilterTodos);
+  }
 
+  FilterTodos = () => {
+    this._getFilteredValues();
+    this._ShowActivities();
+    this._CloseFilterSection();
+  }
+
+  _getFilteredValues = ()=>{
+    let df = FilterDateFrom.value;
+    let dt = FilterDateTo.value;
+    let p = FilterPriority.value;
+    let c = FilterCategory.value;
+    let t = FilterType.value;
+    let prog = FilterProgress.value;
+
+    this.$filteredItems = {};
+    if(df != ''){
+      this.$filteredItems["DateFrom"] = df;
+    }
+    if(dt != ''){
+      this.$filteredItems["DateTo"] = dt;
+    }
+    if(p != "None"){
+      this.$filteredItems["Priority"] = this._GetPriorityValue(FilterPriority);
+    }
+    if(t!="None"){
+      this.$filteredItems["Type"] = t;
+    }
+    if(c != "None"){
+      this.$filteredItems["Category"] = this._GetCategoryValue(FilterCategory);
+    }
+    if(prog != "None"){
+      this.$filteredItems["Progress"] = Number(FilterProgress.value);
+    }
+    console.log(this.$filteredItems);
   }
   
-  _CloseFilterSection = () =>{
+  _CloseFilterSection = () => {
     Overlay.style.display = "none";
     FilterSection.style.display = "none";
+    FilterDateFrom.value = "";
+    FilterDateTo.value = "";
+    FilterPriority.value = "None";
+    FilterCategory.value = "None";
+    FilterType.value = "None";
+    FilterProgress.value = "None";
   }
 }
 
