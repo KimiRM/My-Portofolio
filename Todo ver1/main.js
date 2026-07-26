@@ -342,18 +342,17 @@ class TodoAPP {
     return Number(progressSelect.value);
   }
   _GetProgressEvent = () => {
-    const progressSelect = document.getElementById("progressEvent");
+    try {
+        const progressSelect = document.getElementById("progressEvent");
+        console.log(progressSelect.checked);
+        if (!progressSelect) {
+            return 0;
+        }
 
-    if (!progressSelect) {
-      console.error("Category not found");
-      return 0;
-    }
-
-    if(progressSelect.value=="true"){
+        return progressSelect.checked ? 100 : 0;
+    } catch (error) {
+        console.error("Error getting progress:", error);
         return 0;
-    }
-    else{
-        return 100;
     }
   }
   _AssignID() {
@@ -404,7 +403,7 @@ class TodoAPP {
       duration: dur,
       priority: priority,
       category: category,
-      progress:0
+      progress: progress
     };
     this.$Activities.push(newEvent);
     this._ShowActivities();
@@ -423,6 +422,9 @@ class TodoAPP {
     AddSectionFooter.style.display = "none";
     this.styler._setBg(AddSectionTaskBtn, "#ffffff");
     this.styler._setBg(AddSectionEventBtn, "#F5CAC3");
+    document.getElementById('myRange').value = 0;
+    document.getElementById('progressValue').textContent = '0%';
+    document.getElementById('progressEvent').checked = false;
   };
 
   filterActivitiesByDate(date) {
